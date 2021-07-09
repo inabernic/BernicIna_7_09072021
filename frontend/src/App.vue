@@ -1,42 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App" nom="Ina"/>
-
-<div id="app">
-		<nav>
-			<HomeLink />
-			<a href="/about">À propos</a>
-			<a href="/contact">Contact</a>
-		</nav>
-		<p>Bienvenue sur notre page d'<HomeLink /></p>
-	</div>
-
-
-
-  <div id="app">
-		<nav>
-			<NavLink url="/" text="Accueil" />
-			<NavLink url="/about" text="À propos" />
-			<NavLink url="/contact" text="Contact" />
-		</nav>
-	</div>
-
+<div class="container">
+  <HomeLink  title="CouCou"/>
+<h1>Salut Otilia draga</h1>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import HomeLink from './components/HomeLink.vue'
-import NavLink from './components/NavLink.vue'
-
+import HomeLink from './components/HomeLink'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld, 
-    HomeLink, NavLink
-  }
+    HomeLink,
+  },
 }
 </script>
+
 
 <style lang="scss">
 #app {
@@ -45,6 +24,32 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.btn{
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
