@@ -1,18 +1,48 @@
 <template>
 <div class="container">
   <HomeLink  title="CouCou"/>
-<h1>Salut Otilia draga</h1>
+  <Tasks :tasks="tasks" />
+  <h1>Salut Otilia draga</h1>
 </div>
 </template>
 
 <script>
 import HomeLink from './components/HomeLink'
+import Tasks from './components/Tasks'
 
 export default {
   name: 'App',
   components: {
     HomeLink,
+    Tasks
   },
+  data(){
+    return{
+      tasks:[]
+    }
+  },
+  created(){
+    this.tasks = [
+      {
+        id: 1,
+        text: 'Doctors Appointment',
+        day: 'March 1st at 2:30pm',
+        reminder: true,
+      },
+       {
+        id: 2,
+        text: 'Meeting at School',
+        day: 'March 3st at 1:30pm',
+        reminder: true,
+      },
+       {
+        id: 3,
+        text: 'Shopping',
+        day: 'March 4st at 3:30pm',
+        reminder: false,
+      }
+    ]
+  }
 }
 </script>
 
