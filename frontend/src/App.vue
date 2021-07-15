@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <HomeLink  title="CouCou"/>
-  <Tasks :tasks="tasks" />
+  <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks" />
   <h1>Salut Otilia draga</h1>
 </div>
 </template>
@@ -18,8 +18,18 @@ export default {
   },
   data(){
     return{
-      tasks:[]
+      tasks:[],
     }
+  },
+  methods: {
+    deleteTask(id) {
+      if(confirm('Vous etes sure?')) {
+      this.tasks = this.tasks.filter((task) => task.id !== id )
+      }
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task)
+    },
   },
   created(){
     this.tasks = [
