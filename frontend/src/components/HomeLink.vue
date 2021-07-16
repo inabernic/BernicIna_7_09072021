@@ -2,9 +2,10 @@
 <template>
 <header>
 	<h1>{{ title }}</h1>
-	<Button text="Add Task" color="green"/>
-    <Button text="UpdateTask" color="blue"/>
-	<Button text="Delete Task" color="red"/> 
+	<Button @toggle-add-task="$emit('toggle-add-task')" 
+	:text="showAddTask ? 'Fermé' : 'Ajout des taches'" color="green"/>
+    <Button text="Mis à jour" color="blue"/>
+	<Button text="Suppression" color="red"/> 
 	</header>
 </template>
 
@@ -15,6 +16,7 @@ export default {
 	name: 'HomeLink',
 	props: {
 		title: String,
+		showAddTask: Boolean
 		},
 		components:{
 			Button,

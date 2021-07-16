@@ -11,9 +11,10 @@ export default {
     },
     methods:{
         onClick(){
-            console.log('click')
-        }
-    }
+            /* console.log('click') */
+            this.$emit('toggle-add-task')
+        },
+    },
 }
 </script>
 

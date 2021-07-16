@@ -1,29 +1,48 @@
 <template>
 <div class="container">
-  <HomeLink  title="CouCou"/>
-  <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks" />
-  <h1>Salut Otilia draga</h1>
+    <HomeLink  
+      @toggle-add-task="toggleAddTask" 
+      title="Echange entre les collegues" 
+      :showAddTask="showAddTask"/>
+      <div v-show="showAddTask">
+    <AddTask 
+       @add-task="addTask"/>
+      </div>
+     <Tasks 
+       @toggle-reminder="toggleReminder" 
+        @delete-task="deleteTask" 
+        :tasks="tasks" />
+    <h1>Salut </h1>
 </div>
 </template>
 
 <script>
 import HomeLink from './components/HomeLink'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
 
 export default {
   name: 'App',
   components: {
     HomeLink,
-    Tasks
+    Tasks,
+    AddTask
   },
   data(){
     return{
       tasks:[],
+      showAddTask: false,
     }
   },
   methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+    },
+    addTask(task) {
+      this.tasks = [...this.tasks, task]
+    },
     deleteTask(id) {
-      if(confirm('Vous etes sure?')) {
+      if(confirm('Confirmz vous la suppression ?')) {
       this.tasks = this.tasks.filter((task) => task.id !== id )
       }
     },
@@ -35,20 +54,20 @@ export default {
     this.tasks = [
       {
         id: 1,
-        text: 'Doctors Appointment',
-        day: 'March 1st at 2:30pm',
+        text: 'Reunion generale',
+        day: '10:00 02/08/2021',
         reminder: true,
       },
        {
         id: 2,
-        text: 'Meeting at School',
-        day: 'March 3st at 1:30pm',
+        text: 'Sortie entre nous',
+        day: '11:00 05/08/2021',
         reminder: true,
       },
        {
         id: 3,
-        text: 'Shopping',
-        day: 'March 4st at 3:30pm',
+        text: 'Exposition',
+        day: '14:00 08/08/2021',
         reminder: false,
       }
     ]
