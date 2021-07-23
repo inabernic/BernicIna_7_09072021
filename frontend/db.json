@@ -1,0 +1,22 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "text": "Reunion generale",
+            "day": "02/08/2021",
+            "reminder": true
+          },
+           {
+            "id": "2",
+            "text": "Meeting",
+            "day": "05/08/2021",
+            "reminder": true
+          },
+           {
+            "id": "3",
+            "text": "Exposition",
+            "day": "08/08/2021",
+            "reminder": false
+          }
+    ]
+}

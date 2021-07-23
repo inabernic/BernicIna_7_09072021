@@ -42,35 +42,29 @@ export default {
       this.tasks = [...this.tasks, task]
     },
     deleteTask(id) {
-      if(confirm('Confirmz vous la suppression ?')) {
+      if(confirm('Confirmez vous la suppression ?')) {
       this.tasks = this.tasks.filter((task) => task.id !== id )
       }
     },
     toggleReminder(id) {
       this.tasks = this.tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task)
     },
+    async fetchTasks() {
+      //http://localhost:5000/=api
+      const res = await fetch('api/tasks')
+console.log(res);
+      const data = await res.json ()
+      return data
+    },
+    async fetchTask(id) {
+      const res = await fetch(`api/tasks/${id}`)
+
+      const data = await res.json ()
+      return data
+    },
   },
-  created(){
-    this.tasks = [
-      {
-        id: 1,
-        text: 'Reunion generale',
-        day: '10:00 02/08/2021',
-        reminder: true,
-      },
-       {
-        id: 2,
-        text: 'Sortie entre nous',
-        day: '11:00 05/08/2021',
-        reminder: true,
-      },
-       {
-        id: 3,
-        text: 'Exposition',
-        day: '14:00 08/08/2021',
-        reminder: false,
-      }
-    ]
+  async created(){
+    this.tasks = await this.fetchTasks() 
   }
 }
 </script>

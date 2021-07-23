@@ -28,7 +28,7 @@ export default {
        return{
            text: '',
            day: '',
-           reminder: false
+           reminder: false,
        }
    },
    methods:{
