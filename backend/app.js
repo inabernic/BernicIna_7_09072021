@@ -1,6 +1,11 @@
-const express = require("express");
+// import des modules npm - Ajout des plugins externes
+const express = require("express"); // Importation d'express => Framework basé sur node.js
+
 const helmet = require("helmet");
-const bodyParser = require("body-parser");
+
+// Pour gérer la demande POST provenant de l'application front-end, nous devrons être capables d'extraire l'objet JSON de la demande, on importe donc body-parser
+const bodyParser = require("body-parser"); // Permet d'extraire l'objet JSON des requêtes POST
+
 const app = express();
 const usersRoutes = require("./routes/users");
 const postsRoutes = require("./routes/posts");
@@ -21,7 +26,7 @@ app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  ); // on autorise certaines méthod
+  ); // on autorise ce serveur à fournir des scripts pour la page visitée
   next();
 });
 
@@ -34,8 +39,10 @@ app.use(helmet());
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 // routes
+// Va servir les routes dédiées aux utilisateurs
 app.use("/api/users/", usersRoutes);
 app.use("/api/posts/", postsRoutes);
 app.use("/api/comments/", commentsRoutes);
 
+// Export de l'application express pour déclaration dans server.js
 module.exports = app;

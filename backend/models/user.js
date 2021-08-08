@@ -31,16 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         required: true,
       },
-
-      role: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-
       isAdmin: {
-        type: DataTypes.BOOLEAN,
-      },
-      latent: {
         type: DataTypes.BOOLEAN,
       },
     },

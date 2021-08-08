@@ -23,12 +23,6 @@
       "text": "go to dentist",
       "day": "azi",
       "reminder": true
-    },
-    {
-      "text": "test1",
-      "day": "test1",
-      "reminder": true,
-      "id": 78691
     }
   ]
 }

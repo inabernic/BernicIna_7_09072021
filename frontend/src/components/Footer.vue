@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <p>Copyright &copy; 2021</p>
+        <p>Groupomania | Spécialistes de la grande distribution &copy; 2021</p>
         <router-link to="/about">About</router-link>
     </footer>
 </template>
