@@ -22,21 +22,12 @@ exports.createComment = async (req, res) => {
   }
 };
 
-exports.getComments = async (req, res) => {
+exports.getCommentsByPostId = async (req, res) => {
   try {
-    const order = req.query.order;
     const comments = await models.Comment.findAll({
-      attributes: [
-        "id",
-        "comments",
-        "UserId",
-        "PostId",
-        "createdAt",
-        "updatedAt",
-      ],
-      order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
+      order: [["createdAt", "DESC"]],
       where: { postId: req.params.id },
-      include: [{ model: models.User, attributes: ["username"] }],
+      include: [{ model: models.User, attributes: ["firstName", "lastName"] }],
     });
     if (comments) {
       res.status(200).send({ message: comments });
@@ -48,26 +39,25 @@ exports.getComments = async (req, res) => {
   }
 };
 
-// future project
+exports.getCommentsByUserId = async (req, res) => {
+  try {
+    const comments = await models.Comment.findAll({
+      order: [["createdAt", "DESC"]],
+      where: { userId: req.params.id },
+      include: [{ model: models.User, attributes: ["firstName", "lastName"] }],
+    });
+    if (comments) {
+      res.status(200).send({ message: comments });
+    } else {
+      res.status(200).send({ message: [] });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 exports.deleteComment = async (req, res) => {
   try {
-    const commentFound = await models.Comment.findOne({
-      attributes: [
-        "id",
-        "comments",
-        "UserId",
-        "PostId",
-        "createdAt",
-        "updatedAt",
-      ],
-      where: { id: req.params.id },
-    });
-
-    if (!commentFound) {
-      throw new Error("Can't find your comment");
-    }
-
     await models.Comment.destroy({
       where: { id: req.params.id },
     });

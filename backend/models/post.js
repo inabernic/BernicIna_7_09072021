@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.Post.hasMany(
         models.Comment,
-        { foreignKey: "id_posts" },
+        { foreignKey: "postId" },
         { onDelete: "cascade" }
       );
 
@@ -24,10 +24,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Post.init(
     {
+      userId: DataTypes.INTEGER,
       title: DataTypes.STRING,
       content: DataTypes.STRING,
+      attachement: DataTypes.STRING,
       isModerate: DataTypes.BOOLEAN,
-      attachment: { type: DataTypes.STRING, allowNull: true },
     },
     {
       sequelize,

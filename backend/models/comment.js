@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
       models.Comment.belongsTo(models.User, {
         foreignKey: {
           allowNull: false,
@@ -27,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Comment.init(
     {
-      comments: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
+      postId: DataTypes.INTEGER,
+      comment: DataTypes.STRING,
     },
     {
       sequelize,

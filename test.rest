@@ -1,4 +1,84 @@
+###############################################  USERS
+### get all users
 GET http://localhost:3000/api/users/
 
+### get one user
+GET http://localhost:3000/api/users/2
+
+###user login
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "ina@example.com",
+    "password": "123"
+}
+
+###test update success
+PUT http://localhost:3000/api/users/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI4NDM4NTk4LCJleHAiOjE2Mjg0NDU3OTh9.R05SPLyHgaLu3cBKmouqP0gyCdW6Q3Lq_suvqjB6Q2o
+
+{
+    "email": "aaa@gmail.com",
+    "password": "123!abcID",
+    "firstName": "Paduche",
+    "lastName": "Puric",
+    "userId": 2
+}
+
+###user delete not existing
+DELETE  http://localhost:3000/api/users/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI4NDM4NTk4LCJleHAiOjE2Mjg0NDU3OTh9.R05SPLyHgaLu3cBKmouqP0gyCdW6Q3Lq_suvqjB6Q2o
+
+{
+    "userId":2
+}
+
+
+###test signup fail no last name
+POST http://localhost:3000/api/signup
+Content-Type: application/json
+
+{
+    "email": "aaa@gmail.com",
+    "password": "123!abcID",
+    "firstName": "aaa@gmail.com",
+}
+
+
+###test signup success
+POST http://localhost:3000/api/signup
+Content-Type: application/json
+
+{
+    "email": "aaa@gmail.com",
+    "password": "123!abcID",
+    "firstName": "aaa@gmail.com",
+    "lastName": "123!abcID"
+}
+
+###############################################  POSTS
+
 ###
-GET http://localhost:3000/id
+GET http://localhost:3000/api/posts/
+
+###
+GET http://localhost:3000/api/posts/user/2
+
+
+###############################################  Comments
+###
+GET http://localhost:3000/api/comments/post/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI4NDM4NTk4LCJleHAiOjE2Mjg0NDU3OTh9.R05SPLyHgaLu3cBKmouqP0gyCdW6Q3Lq_suvqjB6Q2o
+Content-Type: application/json
+
+{
+    "userId":2
+}
+
+###
+GET http://localhost:3000/api/comments/user/3
+
+

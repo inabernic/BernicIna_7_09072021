@@ -53,7 +53,7 @@ exports.getAllPosts = async (req, res) => {
       include: [
         {
           model: models.User,
-          attributes: ["username", "isAdmin"],
+          attributes: ["firstName", "lastName"],
         },
       ],
     });
@@ -77,7 +77,7 @@ exports.getPostProfile = async (req, res) => {
       include: [
         {
           model: models.User,
-          attributes: ["username"],
+          attributes: ["firstName", "lastName"],
           where: { id: req.params.id },
         },
       ],

@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Routes
 router.post("/new", auth, multer, postsCtrl.createPost);
-router.get("/posts", auth, multer, postsCtrl.getAllPosts);
+router.get("/", auth, multer, postsCtrl.getAllPosts);
 router.get("/user/:id", auth, multer, postsCtrl.getPostProfile);
 router.delete("/:id", auth, multer, postsCtrl.deletePost);
 router.put("/:id/moderate", postsCtrl.moderatePost);
