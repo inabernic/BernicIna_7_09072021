@@ -1,18 +1,18 @@
 <template>
-    <div @dblclick="$emit('toggle-reminder', task.id)" 
-    :class="[task.reminder ? 'reminder' : '', 'task']">
-        <h3>{{ task.text }}
-            <i @click="$emit('delete-task', task.id)" class="fas fa-times"></i>
+    <div @dblclick="$emit('toggle-reminder', user.id)" 
+    :class="[user.isAdmin ? 'reminder' : '', 'user']">
+        <h3>{{ user.firstName}}
+            {{user.lastName }}
+            <i @click="$emit('delete-task', user.id)" class="fas fa-times"></i>
         </h3>
-        <p>{{ task.day }}</p>
     </div>
  </template>
 
  <script>
     export default {
-        name: 'Task', 
+        name: 'User', 
         props: {
-            task: Object,
+            user: Object,
         },
     }
  </script>
@@ -22,18 +22,18 @@
          color: crimson;
      }
 
-     .task{
+     .user{
          background: #9b8b8b;
          margin: 5px;
          padding: 10px 20px;
          cursor: pointer;
      }
 
-     .task.reminder{
+     .user.reminder{
          border-left: 5px solid green;
      }
 
-     .task h3{
+     .user h3{
          display: flex;
          align-items: center;
          justify-content: space-between;

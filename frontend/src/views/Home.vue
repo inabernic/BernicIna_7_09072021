@@ -1,10 +1,10 @@
 <template>
     <AddTask v-show="showAddTask"
     @add-task="addTask"/>
-     <Tasks 
+     <Users 
        @toggle-reminder="toggleReminder" 
         @delete-task="deleteTask" 
-        :tasks="tasks" 
+        :users="users" 
         />
   <!-- <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
@@ -15,7 +15,7 @@
 
 <script>
 // @ is an alias to /src
-import Tasks from '../components/Tasks'
+import Users from '../components/Users'
 import AddTask from '../components/AddTask'
 
 export default {
@@ -24,12 +24,12 @@ export default {
     showAddTask: Boolean,
   },
   components: {
-    Tasks,
-     AddTask,
+    Users,
+    AddTask,
   },
   data() {
     return{
-      tasks: [],
+      users: [],
     }
   },
    methods: {
@@ -45,15 +45,15 @@ export default {
 
       const data = await res.json()
 
-      this.tasks = [...this.tasks, data]
+      this.users = [...this.tasks, data]
     },
     async deleteTask(id) {
       if(confirm('Confirmez vous la suppression ?')) {
-        const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+        const res = await fetch(`http://localhost:3000/api/users/${id}`, {
           method: 'DELETE'
         })
 
-        res.status === 200 ? (this.tasks = this.tasks.filter((task) => task.id !== id )) : alert('Error deleting task')
+        res.status === 200 ? (this.users = this.users.filter((user) => user.id !== id )) : alert('Error deleting task')
       }
     },
      async toggleReminder(id) {
@@ -72,15 +72,16 @@ export default {
 
       this.tasks = this.tasks.map((task) => task.id === id ? {...task, reminder: data.reminder} : task)
     },
-    async fetchTasks() {
+    async fetchUsers() {
       //http://localhost:5000/=api
       //const res = await fetch('api/tasks')
-      const res = await fetch('http://localhost:5000/tasks')
-      console.log(res);
+      //const res = await fetch('http://localhost:5000/tasks')
+      const res = await fetch('http://localhost:3000/api/users')
       const data = await res.json ()
-      return data
+      console.log(data);
+      return data.users;
     },
-    async fetchTask(id) {
+    async fetchUser(id) {
      //const res = await fetch(`api/tasks/${id}`)
       const res = await fetch(`http://localhost:5000/tasks/${id}`)
 
@@ -89,7 +90,7 @@ export default {
     },
   },
   async created(){
-    this.tasks = await this.fetchTasks() 
+    this.users = await this.fetchUsers() 
   }
 }
 </script>

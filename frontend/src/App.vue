@@ -6,16 +6,11 @@
       :showAddTask="showAddTask"/>
       
       <div v-show="showAddTask">
-    <AddTask @add-task="addTask"/>
+        <AddTask @add-task="addTask"/>
       </div>
-     <Tasks 
-       @toggle-reminder="toggleReminder" 
-        @delete-task="deleteTask" 
-        :tasks="tasks" 
-        />
             <h1>Merci pour votre visite !</h1>
-            <router-view :showAddTask="showAddTask"></router-view>
-        <Footer/>
+      <router-view :showAddTask="showAddTask"></router-view>
+      <Footer/>
 
 </div>
 </template>

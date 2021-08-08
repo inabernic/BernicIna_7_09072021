@@ -11,7 +11,7 @@ router.get("/:id", usersCtrl.getOneUser);
 router.post("/signup", usersCtrl.signup);
 router.post("/login", usersCtrl.login);
 //TODO: add isOwnerOrAdmin middleware
-router.delete("/:id", auth, usersCtrl.deleteUser);
+router.delete("/:id", usersCtrl.deleteUser);
 router.put("/:id", auth, usersCtrl.updateUser);
 
 module.exports = router;
