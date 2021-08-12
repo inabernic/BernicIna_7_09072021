@@ -152,14 +152,15 @@ exports.updateUser = async (req, res) => {
 function createToken(userId) {
   //TODO: use donenv for a value of RANDOM_TOKEN_SECRET
   return (
-    "Bearer " +
-    jwt.sign({ id: userId }, "RANDOM_TOKEN_SECRET", { expiresIn: "24H" })
+    "Bearer " + jwt.sign({ id: userId }, SECRET_TOKEN, { expiresIn: "24H" })
   );
 }
 
 function validationInput(email, firstName, lastName, password) {
   const email_regex =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //ou
+  //    /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const password_regex =
     /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
 
