@@ -5,7 +5,7 @@ GET http://localhost:3000/api/users/
 ### get one user
 GET http://localhost:3000/api/users/2
 
-###user login
+###user login et creation de token
 POST http://localhost:3000/api/users/login
 Content-Type: application/json
 
@@ -17,7 +17,7 @@ Content-Type: application/json
 ###test update success
 PUT http://localhost:3000/api/users/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI4NDM4NTk4LCJleHAiOjE2Mjg0NDU3OTh9.R05SPLyHgaLu3cBKmouqP0gyCdW6Q3Lq_suvqjB6Q2o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI4NjcxMDI5LCJleHAiOjE2Mjg3NTc0Mjl9.OxvDHqQukfkXsRyA_TncR-zOwVLZMeX8DkkLK2cfwfY
 
 {
     "email": "aaa@gmail.com",
