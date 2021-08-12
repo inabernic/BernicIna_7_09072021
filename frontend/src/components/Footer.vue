@@ -1,7 +1,7 @@
 <template>
     <footer>
-        <p>Groupomania | Spécialistes de la grande distribution &copy; 2021</p>
-        <router-link to="/about">About</router-link>
+        <router-link to="/about">Page d'accueil</router-link>
+         <p>Groupomania | Spécialistes de la grande distribution &copy; 2021</p>
     </footer>
 </template>
 

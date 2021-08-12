@@ -8,7 +8,6 @@
       <div v-show="showAddTask">
         <AddTask @add-task="addTask"/>
       </div>
-            <h1>Merci pour votre visite !</h1>
       <router-view :showAddTask="showAddTask"></router-view>
       <Footer/>
 
