@@ -95,6 +95,7 @@ exports.login = async (req, res) => {
       throw new Error("Something gone wrong try again later");
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };
@@ -151,8 +152,10 @@ exports.updateUser = async (req, res) => {
 
 function createToken(userId) {
   //TODO: use donenv for a value of RANDOM_TOKEN_SECRET
+
   return (
-    "Bearer " + jwt.sign({ id: userId }, SECRET_TOKEN, { expiresIn: "24H" })
+    "Bearer " +
+    jwt.sign({ id: userId }, "RANDOM_TOKEN_SECRET", { expiresIn: "24H" })
   );
 }
 
