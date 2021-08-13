@@ -2,8 +2,8 @@
   <div class="login">
     <h1>Login</h1>
     <div class="form">
-      <label for="username">Username</label>
-      <input v-model="username" type="text" name="username" class="input" />
+      <label for="email">Email</label>
+      <input v-model="email" type="email" name="email" class="input" />
       <label for="password">Password</label>
       <input v-model="password" type="password" class="input" />
       <button @click="login()" class="btn">Login</button>
@@ -16,15 +16,26 @@ import store from "@/store";
 export default {
   data() {
     return {
-      username: null,
+      email: null,
       password: null,
     };
   },
   methods: {
-    login() {
+    async login() {
       // Authenticate against API
-      store.user = this.username;
-      this.$router.push("/user");
+      const resp = await fetch('http://localhost:3000/api/users/login', {
+        method : 'POST',
+        headers : {
+          'Content-type' : 'application/json',
+        },
+        body : JSON.stringify({email: this.email,
+                               password: this.password }),
+      });
+      const token = await resp.json();
+      console.log(token);
+      store.user=token.user;
+      localStorage.token = JSON.stringify(token.token); 
+
       const redirectPath = this.$route.query.redirect || "/";
       this.$emit("connect");
       this.$router.push(redirectPath);

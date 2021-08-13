@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Bienvenue {{ user }}</h1>
+    <h1>Bienvenue {{ user.firstName }}</h1>
     <p>
       <router-link
         :to="{
