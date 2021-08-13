@@ -1,19 +1,36 @@
 <template>
   <div id="app">
-    <TheNavigation />
+    <!-- <TheNavigation /> -->
+    <TheNavigationConnex @connect="connect" v-show="!connected"/>
+    <TheNavigationDeconnex v-show="connected"/>
     <transition name="fade" mode="out-in">
-    <router-view :key="$route.path"/>
+    <router-view :key="$route.fullPath" @connect="connect"></router-view>
     </transition>
   </div>
 </template>
 
 <script>
-import TheNavigation from "@/components/TheNavigation"
-
+//import TheNavigation from "@/components/TheNavigation"
+import TheNavigationConnex from "@/components/TheNavigationConnex";
+import TheNavigationDeconnex from "@/components/TheNavigationDeconnex"
 export default{
+  name: "App",
   components: {
-    TheNavigation,
-  }
+   // TheNavigation,
+    TheNavigationConnex,
+    TheNavigationDeconnex,
+  },
+
+  data(){
+    return{
+      connected: false
+    }
+  },
+  methods: {
+    connect() {
+      this.connected = true;
+    },
+  },
 }
 </script>
 

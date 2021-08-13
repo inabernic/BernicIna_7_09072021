@@ -11,6 +11,9 @@ const routes = [
     name: "Home",
     component: Home,
     props: true,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/about",
@@ -28,6 +31,9 @@ const routes = [
     props: true,
     component: () =>
       import(/* webpackChunkName: "PostDetail" */ "../views/PostDetail.vue"),
+    meta: {
+      requiresAuth: true,
+    },
     children: [
       {
         path: ":experienceSlug",

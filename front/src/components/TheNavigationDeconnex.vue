@@ -1,25 +1,12 @@
 <template>
   <nav id="nav">
-    <p class="logo">Goupomania- le meilleur réseau social interne </p>
+    <p class="logo">Goupomania- le meilleur réseau social interne</p>
     <ul class="nav-links">
       <li class="links">
-        <router-link to="/">Home</router-link>
-      </li>
-      <li
-        v-for="post in posts"
-        :key="post.name"
-        class="links"
-      >
-        <router-link :to="{
-            name: 'PostDetail',
-            params: { id: post.id },
-          }"
-        >
-          {{ post.name }}
-        </router-link>
+        <router-link to="/">Discutions</router-link>
       </li>
       <li class="links">
-        <router-link to="/user">Connexion</router-link>
+        <router-link to="/user">Mon Profil</router-link>
       </li>
     </ul>
   </nav>
@@ -40,10 +27,10 @@ export default {
 <style scoped>
 #nav {
   display: flex;
-  align-items:center ;
+  align-items: center;
   position: sticky;
   top: 0;
-  background-color:white ;
+  background-color: white;
   border-bottom: 1px solid grey;
   z-index: 1;
 }

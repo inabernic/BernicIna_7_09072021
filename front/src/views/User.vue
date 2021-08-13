@@ -24,7 +24,7 @@ export default {
   methods: {
     logOut() {
       store.user = null;
-      this.$router.push("/");
+      this.$router.go();
     },
   },
 };
