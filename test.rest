@@ -63,6 +63,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/posts/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI4OTMxMTMxLCJleHAiOjE2MjkwMTc1MzF9.DDNgmkvWfLeas-gaK1WUQ7940MggZv1fXVRZOAFmEnI
 
 ###
 GET http://localhost:3000/api/posts/user/2

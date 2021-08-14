@@ -14,18 +14,6 @@
   </div>
 </template>
 
-<script>
-import store from "@/store";
-export default {
-  data() {
-    return {
-      postId: this.$route.params.id,
-      posts: store.posts,
-    };
-  },
-};
-</script>
-
 <style scoped>
 #nav {
   display: flex;
