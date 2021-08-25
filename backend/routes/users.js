@@ -4,8 +4,8 @@ const usersCtrl = require("../controllers/user");
 const auth = require("../middleware/auth");
 ///    /api/users/
 router.get("/", usersCtrl.getUsers);
-// Route qui permet de cliquer sur une des sauces précise
-// Renvoie la sauce avec l'ID fourni
+// Route qui permet de cliquer sur un post précise
+// Renvoie le post avec l'ID fourni
 router.get("/:id", usersCtrl.getOneUser);
 ///    /api/users/signup
 router.post("/signup", usersCtrl.signup);

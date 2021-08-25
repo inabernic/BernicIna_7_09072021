@@ -38,15 +38,19 @@
 </template>
 
 <script>
-import store from "@/store.js";
 import GoBack from "@/components/GoBack"
 
 export default {
   components:{
     GoBack
   },
-  data() {
-    return {};
+ data() {
+    return {
+      post: {},
+    };
+  },
+  async created() {
+    this.post = await this.getPostDetails();
   },
   props: {
     id: {
@@ -54,11 +58,25 @@ export default {
       required: true,
     },
   },
-  computed: {
-    post() {
-      return store.posts.find(
-        (post) => post.id === this.id
-      );
+ methods: {
+    async getPostDetails() {
+      let posts = "";
+      let api = "http://localhost:3000/api/posts/"+ this.id;
+      const resp = await fetch(api, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: localStorage.token,
+        },
+      });
+      const json = await resp.json();
+      if (resp.ok) {
+        posts = json;
+      } else {
+        console.log(json.error);
+        document.getElementById("message").innerText = "Connexion impossible";
+      }
+      return posts;
     },
   },
 };
