@@ -26,7 +26,7 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/post/:id",
+    path: "/post/:postId",
     name: "PostDetail",
     props: true,
     component: () =>
@@ -45,9 +45,12 @@ const routes = [
           ),
       },
     ],
-    beforeEnter: (to, from, next) => {
-      const exists = store.posts.find((post) => post.id == to.params.id);
-      if (exists) {
+    beforeEnter: async (to, from, next) => {
+      console.log(JSON.stringify(to.params.post));
+      if (!to.params.post) {
+        to.params.post = await store.getPostById(to.params.postId);
+      }
+      if (to.params.post) {
         next();
       } else {
         next({ name: "notFound" });
@@ -65,6 +68,12 @@ const routes = [
     name: "login",
     component: () =>
       import(/* webpackChunkName: "Login" */ "../views/Login.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: () =>
+      import(/* webpackChunkName: "Register" */ "../views/Register.vue"),
   },
   {
     path: "/404",
@@ -85,7 +94,7 @@ const router = new VueRouter({
       const position = {};
       if (to.hash) {
         position.selector = to.hash;
-        if (to.hash === "#experience") {
+        if (to.hash === "#post") {
           position.offset = { y: 140 };
         }
         if (document.querySelector(to.hash)) {
@@ -100,7 +109,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!store.user) {
+    if (!localStorage.user) {
       next({
         name: "login",
         query: { redirect: to.fullPath },

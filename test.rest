@@ -63,7 +63,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/posts/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI4OTMxMTMxLCJleHAiOjE2MjkwMTc1MzF9.DDNgmkvWfLeas-gaK1WUQ7940MggZv1fXVRZOAFmEnI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI5OTk0OTgyLCJleHAiOjE2MzAwODEzODJ9.YrRyERMet8NKRdq0g-edXvdva1QnpA8ySI6dLX4oj4Q
 
 ###
 GET http://localhost:3000/api/posts/user/2
@@ -72,7 +72,7 @@ GET http://localhost:3000/api/posts/user/2
 ###############################################  Comments
 ###
 GET http://localhost:3000/api/comments/post/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI4NDM4NTk4LCJleHAiOjE2Mjg0NDU3OTh9.R05SPLyHgaLu3cBKmouqP0gyCdW6Q3Lq_suvqjB6Q2o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjI5OTk0OTgyLCJleHAiOjE2MzAwODEzODJ9.YrRyERMet8NKRdq0g-edXvdva1QnpA8ySI6dLX4oj4Q
 Content-Type: application/json
 
 {

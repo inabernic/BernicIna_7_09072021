@@ -3,11 +3,11 @@
      <div id="mybutton">
       <button @click="logOut" class="btn logout">Log out</button>
     </div>
-    <h1>Toutes les posts</h1>
+    <h1 class="title">Goupomania- le meilleur réseau social interne </h1>
 
     <div class="posts">
       <div v-for="post in posts" :key="post.id">
-        <router-link :to="{ name: 'PostDetail', params: { id: post.id } }">
+        <router-link :to="{ name: 'PostDetail', params: { post: post, postId: post.id.toString() } }">
           <Post :post="post" />
         </router-link>
       </div>
@@ -30,36 +30,21 @@ export default {
     };
   },
   async created() {
-    this.posts = await this.getAllPosts();
+    this.posts = await store.getAllPosts();
   },
   methods: {
     logOut() {
-      store.user = null;
+      localStorage.clear();
       this.$router.go();
-    },
-    async getAllPosts() {
-      let posts = "";
-      const resp = await fetch("http://localhost:3000/api/posts", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: localStorage.token,
-        },
-      });
-      const json = await resp.json();
-      if (resp.ok) {
-        posts = json;
-      } else {
-        console.log(json.error);
-        document.getElementById("message").innerText = "Connexion impossible";
-      }
-      return posts;
     },
   },
 };
 </script>
 
 <style scoped>
+.title{
+  text-align: left;
+}
 .home {
   max-width: 1400px;
   margin: 0 auto;
@@ -68,11 +53,11 @@ img {
   max-width: 200px;
 }
 .posts {
-  display: block;
+  display:block;
   align-content: left;
 }
 a {
-  color: lightseagreen;
+  color: rgb(77, 127, 235);
   text-decoration: none;
 }
 a:hover,
@@ -80,11 +65,11 @@ a:visited {
   text-decoration: underline;
 }
 .logout {
-  background-color : #31B0D5;
+  background-color : red;
   color: white;
   padding: 10px 20px;
   border-radius: 4px;
-  border-color: #46b8da;
+  border-color: rgb(124, 18, 18);
 }
 #mybutton {
   position: fixed;

@@ -7,7 +7,7 @@
 
     <div class="posts">
       <div v-for="post in myPosts" :key="post.id">
-        <router-link :to="{ name: 'PostDetail', params: { id: post.id + '' } }">
+        <router-link :to="{ name: 'PostDetail', params: { post: post, postId: post.id.toString() } }">
           <Post :post="post" />
         </router-link>
       </div>
@@ -22,36 +22,17 @@ export default {
   components: { Post },
   data() {
     return {
-      user: store.user,
+      user: JSON.parse(localStorage.user),
       myPosts: [],
     };
   },
   async created() {
-    this.myPosts = await this.getMyPosts();
+    this.myPosts = await store.getMyPosts(this.user);
   },
   methods: {
     logOut() {
-      store.user = null;
+      localStorage.clear();
       this.$router.go();
-    },
-    async getMyPosts() {
-      let posts = "";
-      let api = "http://localhost:3000/api/posts/user/"+ store.user.id;
-      const resp = await fetch(api, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: localStorage.token,
-        },
-      });
-      const json = await resp.json();
-      if (resp.ok) {
-        posts = json;
-      } else {
-        console.log(json.error);
-        document.getElementById("message").innerText = "Connexion impossible";
-      }
-      return posts;
     },
   },
 };
@@ -59,11 +40,11 @@ export default {
 
 <style scoped>
 .logout {
-  background-color : #31B0D5;
+  background-color : red;
   color: white;
   padding: 10px 20px;
   border-radius: 4px;
-  border-color: #46b8da;
+  border-color: rgb(124, 18, 18);
 }
 
 #mybutton {

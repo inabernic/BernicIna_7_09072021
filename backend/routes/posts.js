@@ -10,6 +10,7 @@ const router = express.Router();
 router.post("/new", auth, multer, postsCtrl.createPost);
 router.get("/", auth, multer, postsCtrl.getAllPosts);
 router.get("/user/:id", auth, multer, postsCtrl.getPostProfile);
+router.get("/:id", auth, multer, postsCtrl.getPostById);
 router.delete("/:id", auth, multer, postsCtrl.deletePost);
 router.put("/:id/moderate", postsCtrl.moderatePost);
 

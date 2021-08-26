@@ -2,34 +2,25 @@
   <div>
     <GoBack />
     <section class="post">
-      <h1>{{ post.name }}</h1>
-      <div class="post-details">
-        <img :src="require(`@/assets/${post.image}`)" />
-        <h4>{{ post.description }}</h4>
-      </div>
+      <h2>{{ post.title }}</h2>
+      <h3>{{ post.content }}</h3>
+      <h5>
+        Modifié le: <span style="color: blue">{{ post.updatedAt }}</span>
+      </h5>
+      <h5>
+        Posté par:
+        <span style="color: blue"
+          >{{ post.User.firstName }} {{ post.User.lastName }}</span
+        >
+      </h5>
     </section>
 
-    <section class="experiences">
-      <h2>Top comments in {{ post.name }}</h2>
-      <div class="cards" id="experience">
-        <div
-          v-for="experience in post.experiences"
-          :key="experience.slug"
-          class="card"
-        >
-          <router-link
-            :to="{
-              name: 'experienceDetails',
-              params: { experienceSlug: experience.slug },
-              hash: '#experience'
-            }"
-          >
-            <img
-              :src="require(`@/assets/${experience.image}`)"
-              :alt="experience.name"
-            />
-            <span class="card_text">{{ experience.name }}</span>
-          </router-link>
+    <section class="comms">
+      <h2>Commentaires</h2>
+      <div class="cards" id="commentaires">
+        <div v-for="comm in commentaires" :key="comm.id" class="card">
+          <span class="card_text">{{ comm.comment }}</span>
+          <span> de {{ comm.User.firstName }} {{comm.User.lastName}} </span>
         </div>
       </div>
       <router-view :key="$route.path" />
@@ -38,46 +29,33 @@
 </template>
 
 <script>
-import GoBack from "@/components/GoBack"
+import GoBack from "@/components/GoBack";
+import store from "@/store";
 
 export default {
-  components:{
-    GoBack
+  components: {
+    GoBack,
   },
- data() {
+  data() {
     return {
-      post: {},
+      commentaires: [],
     };
   },
   async created() {
-    this.post = await this.getPostDetails();
+    this.commentaires = await store.getCommentsForPost(this.postId);
   },
   props: {
-    id: {
+    post: {
+      type: Object,
+      required: true,
+    },
+    postId: {
       type: String,
       required: true,
     },
   },
- methods: {
-    async getPostDetails() {
-      let posts = "";
-      let api = "http://localhost:3000/api/posts/"+ this.id;
-      const resp = await fetch(api, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: localStorage.token,
-        },
-      });
-      const json = await resp.json();
-      if (resp.ok) {
-        posts = json;
-      } else {
-        console.log(json.error);
-        document.getElementById("message").innerText = "Connexion impossible";
-      }
-      return posts;
-    },
+  methods: {
+
   },
 };
 </script>
@@ -90,7 +68,7 @@ img {
   max-height: 400px;
 }
 
-.experiences{
+.comms {
   padding: 40px 0;
 }
 

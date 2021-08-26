@@ -92,6 +92,27 @@ exports.getPostProfile = async (req, res) => {
   }
 };
 
+exports.getPostById = async (req, res) => {
+  try {
+    const postProfile = await models.Post.findOne({
+      include: [
+        {
+          model: models.User,
+          attributes: ["firstName", "lastName"],
+          where: { id: req.params.id },
+        },
+      ],
+    });
+    if (!postProfile) {
+      throw new Error(" This user has posted nothing ");
+    }
+
+    res.status(200).json(postProfile);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 exports.moderatePost = async (req, res) => {
   try {
     const postToModerate = await models.Post.findOne({

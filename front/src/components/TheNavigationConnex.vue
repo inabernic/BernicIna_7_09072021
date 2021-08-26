@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="logo">Goupomania- le meilleur réseau social interne</div>
+    <div class="logo">Iconita</div>
     <nav id="nav">
       <ul class="nav-links">
         <li class="links">
           <router-link to="/">Authentification</router-link>
         </li>
         <li class="links">
-          <router-link to="/user">Inscription</router-link>
+          <router-link to="/register">Inscription</router-link>
         </li>
       </ul>
     </nav>
@@ -52,7 +52,6 @@
 
 .logo {
   font-size: 20px;
-  color: rgb(14, 185, 85);
   font-weight: bold;
 }
 </style>

@@ -30,7 +30,7 @@ exports.getCommentsByPostId = async (req, res) => {
       include: [{ model: models.User, attributes: ["firstName", "lastName"] }],
     });
     if (comments) {
-      res.status(200).send({ message: comments });
+      res.status(200).send(comments);
     } else {
       throw new Error("There are no comments");
     }

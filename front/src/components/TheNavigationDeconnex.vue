@@ -1,6 +1,6 @@
 <template>
   <nav id="nav">
-    <p class="logo">Goupomania- le meilleur réseau social interne</p>
+    <p class="logo">Iconita</p>
     <ul class="nav-links">
       <li class="links">
         <router-link to="/">Discutions</router-link>
@@ -48,7 +48,6 @@
 
 .logo {
   font-size: 20px;
-  color: rgb(14, 185, 85);
   font-weight: bold;
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <div class="login">
-    <h1>Login</h1>
+  <div class="register">
+    <h1>Inscription</h1>
     <div class="form">
       <label for="email">Email</label>
       <input v-model="email" type="email" name="email" class="input" required />
       <label for="password">Password</label>
       <input v-model="password" type="password" class="input" required />
-      <button @click="login()" class="btn">Login</button>
+      <button @click="register()" class="btn">Register</button>
       <p id="message"></p>
     </div>
   </div>
@@ -22,8 +22,8 @@ export default {
     };
   },
   methods: {
-    async login() {
-      let json = await store.login(this.email, this.password);
+    async register() {
+      let json = await store.register(this.email, this.password);
       console.log(json);
       if (json) {
         localStorage.user = JSON.stringify({userId: json.user.id, firstName: json.user.firstName});
