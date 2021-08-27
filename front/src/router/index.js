@@ -34,17 +34,7 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
-    children: [
-      {
-        path: ":experienceSlug",
-        name: "experienceDetails",
-        props: true,
-        component: () =>
-          import(
-            /* webpackChunkName: "ExperienceDetails" */ "../views/ExperienceDetails.vue"
-          ),
-      },
-    ],
+
     beforeEnter: async (to, from, next) => {
       console.log(JSON.stringify(to.params.post));
       if (!to.params.post) {

@@ -17,6 +17,29 @@ export default {
     }
   },
 
+  async inscription(firstName, lastName, email, password) {
+    // Authenticate against API
+    const resp = await fetch("http://localhost:3000/api/users/signup", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      }),
+    });
+    const json = await resp.json();
+    if (resp.ok) {
+      return json;
+    } else {
+      console.log(json.error);
+      return false;
+    }
+  },
+
   async getPostById(postId) {
     let post = false;
     let api = "http://localhost:3000/api/posts/" + postId;

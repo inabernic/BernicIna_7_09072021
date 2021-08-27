@@ -30,10 +30,12 @@ exports.getOneUser = async (req, res) => {
 };
 
 exports.signup = async (req, res) => {
-  const email = req.body.email;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
+  const email = req.body.email;
   const password = req.body.password;
+
+  console.log(req.body);
 
   try {
     //verif params
