@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <div class="logo">Iconita</div>
     <nav id="nav">
+      <img class="logo" :src="require('@/assets/icon-left-font.png')" :alt="Logo"/>
       <ul class="nav-links">
         <li class="links">
           <router-link to="/">Authentification</router-link>
@@ -11,47 +10,8 @@
         </li>
       </ul>
     </nav>
-  </div>
 </template>
 
 <style scoped>
-#nav {
-  display: flex;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  background-color: white;
-  border-bottom: 1px solid grey;
-  z-index: 1;
-}
 
-#nav a {
-  color: #2c3e50;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-#nav a.vue-activ-link-class {
-  color: #42b983;
-}
-
-.nav-links {
-  padding-inline-start: 0px;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.links {
-  list-style: none;
-}
-
-.links:hover {
-  text-decoration: underline;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
 </style>

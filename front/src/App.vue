@@ -106,4 +106,52 @@ export default {
   color: white;
   padding: 10px;
 }
+
+/* Navigation common styles */
+.logo{
+  height: 3rem;
+  position:absolute;
+  left: 0rem;
+}
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  border-bottom: 1px solid grey;
+  z-index: 1;
+}
+
+#nav a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#nav a.vue-activ-link-class {
+  color: #42b983;
+}
+
+.nav-links {
+  display: flex;
+}
+
+.links {
+  padding-right: 20px;
+  list-style: none;
+}
+
+.links:hover {
+  text-decoration: underline;
+}
+
+.logout {
+  background-color: rgb(224, 72, 72);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border-color: rgb(124, 18, 18);
+}
 </style>

@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div id="mybutton">
-      <button @click="logOut" class="btn logout">Log out</button>
-    </div>
     <h1>Salut {{ user.firstName }}, voila tes posts:</h1>
 
     <div class="posts">
@@ -39,17 +36,5 @@ export default {
 </script>
 
 <style scoped>
-.logout {
-  background-color : red;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  border-color: rgb(124, 18, 18);
-}
 
-#mybutton {
-  position: fixed;
-  bottom: -4px;
-  right: 10px;
-}
 </style>

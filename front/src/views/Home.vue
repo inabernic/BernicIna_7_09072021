@@ -1,10 +1,6 @@
 <template>
   <div class="home">
-     <div id="mybutton">
-      <button @click="logOut" class="btn logout">Log out</button>
-    </div>
     <h1 class="title">Goupomania- le meilleur réseau social interne </h1>
-
     <div class="posts">
       <div v-for="post in posts" :key="post.id">
         <router-link :to="{ name: 'PostDetail', params: { post: post, postId: post.id.toString() } }">
@@ -43,7 +39,7 @@ export default {
 
 <style scoped>
 .title{
-  text-align: left;
+  text-align: center;
 }
 .home {
   max-width: 1400px;
@@ -63,18 +59,6 @@ a {
 a:hover,
 a:visited {
   text-decoration: underline;
-}
-.logout {
-  background-color : red;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  border-color: rgb(124, 18, 18);
-}
-#mybutton {
-  position: fixed;
-  bottom: -4px;
-  right: 10px;
 }
 </style>
 
