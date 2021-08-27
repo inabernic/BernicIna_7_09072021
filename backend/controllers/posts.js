@@ -6,18 +6,16 @@ const fs = require("fs");
 exports.createPost = async (req, res) => {
   try {
     // attachment
-    const attachmentURL = `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`;
-
-    if (!attachmentURL) {
-      throw new Error(" Sorry, missing parameters");
+    let attachmentURL = null;
+    if (req.file) {
+      attachmentURL = `${req.protocol}://${req.get("host")}/images/${
+        req.file.filename
+      }`;
     }
 
     // user
     const findUser = await models.User.findOne({
-      attributes: ["username", "role"],
-      where: { id: req.user.id },
+      where: { id: req.body.userId },
     });
 
     if (!findUser) {
@@ -27,8 +25,8 @@ exports.createPost = async (req, res) => {
     const newPost = await models.Post.create({
       title: req.body.title,
       content: req.body.content,
-      attachment: attachmentURL,
-      UserId: req.user.id,
+      attachement: attachmentURL,
+      UserId: req.body.userId,
       isModerate: 0,
     });
 

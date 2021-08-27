@@ -72,6 +72,14 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "NotFound" */ "../views/NotFound.vue"),
   },
+  {
+    path: "/new",
+    name: "newPost",
+    component: () =>
+      import(
+        /* webpackChunkName: "CreationPost" */ "../views/CreationPost.vue"
+      ),
+  },
 ];
 
 const router = new VueRouter({

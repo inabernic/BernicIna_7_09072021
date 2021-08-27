@@ -40,6 +40,31 @@ export default {
     }
   },
 
+  async createPost(title, content, file) {
+    // Authenticate against API
+    let user = JSON.parse(localStorage.user);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("file", file);
+    formData.append("userId", user.userId);
+
+    const resp = await fetch("http://localhost:3000/api/posts/new", {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.token,
+      },
+      body: formData,
+    });
+    const json = await resp.json();
+    if (resp.ok) {
+      return json;
+    } else {
+      console.log(json.error);
+      return false;
+    }
+  },
+
   async getPostById(postId) {
     let post = false;
     let api = "http://localhost:3000/api/posts/" + postId;

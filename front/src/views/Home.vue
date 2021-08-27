@@ -1,9 +1,18 @@
 <template>
   <div class="home">
-    <h1 class="title">Goupomania- le meilleur réseau social interne </h1>
+    <h1 class="title">Goupomania- le meilleur réseau social interne</h1>
+
+    <router-link to="/new"> Ajouter un nouveau post
+    </router-link>
+
     <div class="posts">
       <div v-for="post in posts" :key="post.id">
-        <router-link :to="{ name: 'PostDetail', params: { post: post, postId: post.id.toString() } }">
+        <router-link
+          :to="{
+            name: 'PostDetail',
+            params: { post: post, postId: post.id.toString() },
+          }"
+        >
           <Post :post="post" />
         </router-link>
       </div>
@@ -38,7 +47,7 @@ export default {
 </script>
 
 <style scoped>
-.title{
+.title {
   text-align: center;
 }
 .home {
@@ -49,7 +58,7 @@ img {
   max-width: 200px;
 }
 .posts {
-  display:block;
+  display: block;
   align-content: left;
 }
 a {

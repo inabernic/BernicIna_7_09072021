@@ -1,7 +1,7 @@
 <template>
 
   <nav id="nav">
-      <img class="logo" :src="require('@/assets/icon-left-font.png')" :alt="Logo"/>
+      <img class="logo" :src="require('@/assets/icon-left-font.png')" alt="Logo"/>
     <ul class="nav-links">
       <li class="links">
         <router-link to="/">Discutions</router-link>

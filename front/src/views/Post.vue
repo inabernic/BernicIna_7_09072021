@@ -1,6 +1,7 @@
 <template>
   <div class="boxPost">
     <h2>{{ post.title }}</h2>
+    <img v-show="post.attachement" :src="post.attachement" alt="image" >
     <h3>{{ post.content }}</h3>
     <h5>Modifié le: <span style="color:blue">{{ post.updatedAt }}</span></h5>
     <h5>Posté par: <span style="color:blue">{{ post.User.firstName }} {{ post.User.lastName }}</span></h5>
