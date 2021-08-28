@@ -92,7 +92,7 @@ exports.getPostProfile = async (req, res) => {
 
 exports.getPostById = async (req, res) => {
   try {
-    const postProfile = await models.Post.findOne({
+    const post = await models.Post.findOne({
       where: { id: req.params.id },
       include: [
         {
@@ -101,8 +101,10 @@ exports.getPostById = async (req, res) => {
         },
       ],
     });
-    if (!postProfile) {
-      throw new Error(" This user has posted nothing ");
+    if (!post) {
+      let err = " No post with this id " + req.params.id;
+      console.log(err);
+      throw new Error(err);
     }
 
     res.status(200).json(postProfile);
