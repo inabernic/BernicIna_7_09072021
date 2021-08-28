@@ -36,7 +36,6 @@ const routes = [
     },
 
     beforeEnter: async (to, from, next) => {
-      console.log(JSON.stringify(to.params.post));
       if (!to.params.post) {
         to.params.post = await store.getPostById(to.params.postId);
       }

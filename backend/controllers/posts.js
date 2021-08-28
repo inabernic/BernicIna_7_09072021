@@ -93,11 +93,11 @@ exports.getPostProfile = async (req, res) => {
 exports.getPostById = async (req, res) => {
   try {
     const postProfile = await models.Post.findOne({
+      where: { id: req.params.id },
       include: [
         {
           model: models.User,
           attributes: ["firstName", "lastName"],
-          where: { id: req.params.id },
         },
       ],
     });

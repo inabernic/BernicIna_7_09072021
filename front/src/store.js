@@ -65,6 +65,30 @@ export default {
     }
   },
 
+  async addComment(postId, newComment) {
+    // Authenticate against API
+    let user = JSON.parse(localStorage.user);
+    const resp = await fetch("http://localhost:3000/api/comments/new", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.token,
+      },
+      body: JSON.stringify({
+        comments: newComment,
+        userId: user.userId,
+        postId: postId,
+      }),
+    });
+    const json = await resp.json();
+    if (resp.ok) {
+      return json;
+    } else {
+      console.log(json.error);
+      return false;
+    }
+  },
+
   async getPostById(postId) {
     let post = false;
     let api = "http://localhost:3000/api/posts/" + postId;

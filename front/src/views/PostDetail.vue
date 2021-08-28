@@ -16,11 +16,26 @@
     </section>
 
     <section class="comms">
-      <h2>Commentaires</h2>
+      <h2>La liste des Commentaires:</h2>
+
+      <div>
+        <textarea
+          rows="5"
+          cols="33"
+          v-model="newComment"
+          type="text"
+          name="content"
+          placeholder="Laisser un commentaire..."
+          required
+        ></textarea>
+      </div>
+
+      <button @click="addComment" class="btn">Ajouter</button>
+      <p id="message"></p>
       <div class="cards" id="commentaires">
         <div v-for="comm in commentaires" :key="comm.id" class="card">
           <span class="card_text">{{ comm.comment }}</span>
-          <span> de {{ comm.User.firstName }} {{comm.User.lastName}} </span>
+          <span> de {{ comm.User.firstName }} {{ comm.User.lastName }} </span>
         </div>
       </div>
       <router-view :key="$route.path" />
@@ -39,6 +54,7 @@ export default {
   data() {
     return {
       commentaires: [],
+      newComment: null,
     };
   },
   async created() {
@@ -55,7 +71,19 @@ export default {
     },
   },
   methods: {
-
+    async addComment() {
+      if (!this.newComment) {
+        return;
+      }
+      let json = await store.addComment(this.postId, this.newComment);
+      if (json) {
+        //redirection
+        this.$router.go();
+      } else {
+        document.getElementById("message").innerText =
+          "L'ajout du post est impossible";
+      }
+    },
   },
 };
 </script>

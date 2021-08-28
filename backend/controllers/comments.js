@@ -5,11 +5,10 @@ const fs = require("fs");
 
 exports.createComment = async (req, res) => {
   try {
-    let comments = req.body.comments;
     const newCom = await models.Comment.create({
-      comments: comments,
-      UserId: req.user.id,
-      PostId: req.params.id,
+      comment: req.body.comments,
+      UserId: req.body.userId,
+      PostId: req.body.postId,
     });
 
     if (newCom) {
@@ -18,6 +17,7 @@ exports.createComment = async (req, res) => {
       throw new Error("Sorry , something gone wrong");
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };
