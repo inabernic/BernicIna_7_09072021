@@ -58,7 +58,7 @@ exports.signup = async (req, res) => {
       isAdmin: 0,
     });
 
-    const token = createToken(newUser.id);
+    const token = createToken(newUser.id, newUser.isAdmin);
 
     res.status(201).json({
       user: newUser,
@@ -87,7 +87,7 @@ exports.login = async (req, res) => {
       throw new Error("Incorrect password");
     }
 
-    const token = createToken(user.id);
+    const token = createToken(user.id, user.isAdmin);
     res.status(200).json({
       user: user,
       token,
@@ -152,12 +152,14 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-function createToken(userId) {
+function createToken(userId, isAdmin) {
   //TODO: use donenv for a value of RANDOM_TOKEN_SECRET
   // const SECRET_TOKEN = process.env.SECRET_TOKEN;
   return (
     "Bearer " +
-    jwt.sign({ id: userId }, "RANDOM_TOKEN_SECRET", { expiresIn: "24H" })
+    jwt.sign({ id: userId, isAdmin: isAdmin }, "RANDOM_TOKEN_SECRET", {
+      expiresIn: "24H",
+    })
   );
 }
 

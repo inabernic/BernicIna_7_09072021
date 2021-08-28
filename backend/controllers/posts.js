@@ -6,9 +6,9 @@ const fs = require("fs");
 exports.createPost = async (req, res) => {
   try {
     // attachment
-    let attachmentURL = null;
+    let attachementURL = null;
     if (req.file) {
-      attachmentURL = `${req.protocol}://${req.get("host")}/images/${
+      attachementURL = `${req.protocol}://${req.get("host")}/images/${
         req.file.filename
       }`;
     }
@@ -25,7 +25,7 @@ exports.createPost = async (req, res) => {
     const newPost = await models.Post.create({
       title: req.body.title,
       content: req.body.content,
-      attachement: attachmentURL,
+      attachement: attachementURL,
       UserId: req.body.userId,
       isModerate: 0,
     });
@@ -150,9 +150,9 @@ exports.deletePost = async (req, res) => {
       where: { id: req.params.id },
     });
 
-    // attachment
-    if (post.attachment !== null) {
-      const filename = post.attachment.split("/images")[1];
+    // attachement
+    if (post.attachement !== null) {
+      const filename = post.attachement.split("/images")[1];
       fs.unlink(`images/${filename}`, (error) => {
         error ? console.log(error) : console.log("file has been deleted");
       });
@@ -172,30 +172,19 @@ exports.deletePost = async (req, res) => {
     } else {
       res.status(200).json({ message: "Post has been deleted " });
     }
-
-    // comment
-    const destroyedComment = await models.Comment.destroy({
-      where: { id: req.params.id },
-    });
-
-    if (!destroyedComment) {
-      throw new Error("Sorry,something gone wrong,please try again later");
-    } else {
-      res.status(200).json({ message: "Your comment has been deleted" });
-    }
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(501).json({ error: error.message });
   }
 };
 
 // PROJET AMELIORATION
 exports.updatePost = async (req, res) => {
   try {
-    const attachmentURL = `${req.protocol}://${req.get("host")}/images/${
+    const attachementURL = `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`;
 
-    if (!attachmentURL) {
+    if (!attachementURL) {
       throw new Error("Sorry,something gone wrong , please try aagain later");
     }
 
@@ -214,7 +203,7 @@ exports.updatePost = async (req, res) => {
     await postFound.update({
       title: req.body.title,
       content: req.body.content,
-      attachment: attachmentURL,
+      attachement: attachementURL,
       userId: req.user.id,
     });
 

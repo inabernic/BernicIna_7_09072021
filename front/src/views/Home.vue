@@ -2,19 +2,11 @@
   <div class="home">
     <h1 class="title">Goupomania- le meilleur réseau social interne</h1>
 
-    <router-link to="/new"> Ajouter un nouveau post
-    </router-link>
+    <router-link to="/new"> Ajouter un nouveau post </router-link>
 
     <div class="posts">
       <div v-for="post in posts" :key="post.id">
-        <router-link
-          :to="{
-            name: 'PostDetail',
-            params: { post: post, postId: post.id.toString() },
-          }"
-        >
-          <Post :post="post" />
-        </router-link>
+        <Post :post="post" />
       </div>
     </div>
     <p id="message"></p>
@@ -61,14 +53,7 @@ img {
   display: block;
   align-content: left;
 }
-a {
-  color: rgb(77, 127, 235);
-  text-decoration: none;
-}
-a:hover,
-a:visited {
-  text-decoration: underline;
-}
+
 </style>
 
 

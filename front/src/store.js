@@ -109,6 +109,23 @@ export default {
     }
   },
 
+  async deletePost(postId) {
+    const resp = await fetch("http://localhost:3000/api/posts/" + postId, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.token,
+      },
+    });
+    const json = await resp.json();
+    if (resp.ok) {
+      return json;
+    } else {
+      console.log(json.error);
+      return false;
+    }
+  },
+
   async getPostById(postId) {
     let post = false;
     let api = "http://localhost:3000/api/posts/" + postId;
