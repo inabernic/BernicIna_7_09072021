@@ -1,4 +1,4 @@
-const Post = require("../models/post");
+const models = require("../models");
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
@@ -7,12 +7,12 @@ module.exports = (req, res, next) => {
   const decodedToken = jwt.verify(token, SECRET_TOKEN);
   const userId = decodedToken.userId;
 
-  Post.findOne({ _id: req.params.id }).then((post) => {
+  models.Post.findOne({ where: { id: req.params.id } }).then((post) => {
     if (userId === post.userId) {
       next();
     } else {
       res.status(403).json({
-        error: new Error("Invalid request!"),
+        error: "Invalid request! Le post apartient à un autre utilisateur",
       });
     }
   });

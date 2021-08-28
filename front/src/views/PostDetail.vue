@@ -16,8 +16,6 @@
     </section>
 
     <section class="comms">
-      <h2>La liste des Commentaires:</h2>
-
       <div>
         <textarea
           rows="5"
@@ -26,16 +24,25 @@
           type="text"
           name="content"
           placeholder="Laisser un commentaire..."
-          required
-        ></textarea>
+        >
+        </textarea>
       </div>
-
       <button @click="addComment" class="btn">Ajouter</button>
       <p id="message"></p>
+
+      <p>Commentaires:</p>
+      <p></p>
       <div class="cards" id="commentaires">
         <div v-for="comm in commentaires" :key="comm.id" class="card">
-          <span class="card_text">{{ comm.comment }}</span>
-          <span> de {{ comm.User.firstName }} {{ comm.User.lastName }} </span>
+          <p style="color: blue">
+            {{ comm.User.firstName }} {{ comm.User.lastName }}
+          </p>
+          <p class="card_text">
+            <button @click="deleteComment(comm.id)" v-show="showDelete(comm)">
+              x
+            </button>
+            {{ comm.comment }}
+          </p>
         </div>
       </div>
       <router-view :key="$route.path" />
@@ -84,6 +91,24 @@ export default {
           "L'ajout du post est impossible";
       }
     },
+
+    showDelete(comment) {
+      let loggedUserId = JSON.parse(localStorage.user).userId;
+      let isAdmin = JSON.parse(localStorage.user).isAdmin;
+      let commentUserId = comment.UserId;
+      return loggedUserId == commentUserId || isAdmin==1;
+    },
+
+    async deleteComment(idComm) {
+      let json= await store.deleteComment(idComm);
+      if (json) {
+        //redirection
+        this.$router.go();
+      } else {
+        document.getElementById("message").innerText =
+          "La supression du commentaire est impossible!";
+      }
+    },
   },
 };
 </script>
@@ -106,7 +131,6 @@ img {
 }
 
 p {
-  margin: 0 40px;
   font-size: 20px;
   text-align: left;
 }
@@ -125,5 +149,7 @@ p {
   font-size: 25px;
   font-weight: bold;
   text-decoration: none;
+  font-style: italic;
+  margin: 0.5rem;
 }
 </style>

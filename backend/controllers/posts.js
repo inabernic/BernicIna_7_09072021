@@ -107,7 +107,7 @@ exports.getPostById = async (req, res) => {
       throw new Error(err);
     }
 
-    res.status(200).json(postProfile);
+    res.status(200).json(post);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
