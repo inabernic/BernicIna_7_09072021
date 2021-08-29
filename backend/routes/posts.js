@@ -4,6 +4,7 @@ const postsCtrl = require("../controllers/posts");
 const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
 const isOwnerOrAdminPost = require("../middleware/isOwnerOrAdminPost");
+const isOwnerPost = require("../middleware/isOwnerPost");
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.get("/", auth, multer, postsCtrl.getAllPosts);
 router.get("/user/:id", auth, multer, postsCtrl.getPostProfile);
 router.get("/:id", auth, multer, postsCtrl.getPostById);
 router.delete("/:id", auth, multer, isOwnerOrAdminPost, postsCtrl.deletePost);
+router.put("/:id", auth, multer, isOwnerPost, postsCtrl.updatePost);
 router.put("/:id/moderate", postsCtrl.moderatePost);
 
 module.exports = router;

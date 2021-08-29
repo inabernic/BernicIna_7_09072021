@@ -27,7 +27,7 @@ const routes = [
   },
   {
     path: "/post/:postId",
-    name: "PostDetail",
+    name: "PostDetailRoute",
     props: true,
     component: () =>
       import(/* webpackChunkName: "PostDetail" */ "../views/PostDetail.vue"),
@@ -78,6 +78,13 @@ const routes = [
       import(
         /* webpackChunkName: "CreationPost" */ "../views/CreationPost.vue"
       ),
+  },
+  {
+    path: ".",
+    props: true,
+    name: "updatePost",
+    component: () =>
+      import(/* webpackChunkName: "updatePost" */ "../views/UpdatePost.vue"),
   },
 ];
 

@@ -4,9 +4,7 @@
 
     <div class="posts">
       <div v-for="post in myPosts" :key="post.id">
-        <router-link :to="{ name: 'PostDetail', params: { post: post, postId: post.id.toString() } }">
           <Post :post="post" />
-        </router-link>
       </div>
     </div>
   </div>
@@ -27,10 +25,7 @@ export default {
     this.myPosts = await store.getMyPosts(this.user);
   },
   methods: {
-    logOut() {
-      localStorage.clear();
-      this.$router.go();
-    },
+
   },
 };
 </script>

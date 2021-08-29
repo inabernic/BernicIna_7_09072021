@@ -30,10 +30,7 @@ export default {
     this.posts = await store.getAllPosts();
   },
   methods: {
-    logOut() {
-      localStorage.clear();
-      this.$router.go();
-    },
+
   },
 };
 </script>

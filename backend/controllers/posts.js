@@ -40,6 +40,48 @@ exports.createPost = async (req, res) => {
   }
 };
 
+exports.updatePost = async (req, res) => {
+  try {
+    const postFound = await models.Post.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (!postFound) {
+      throw new Error("Sorry,can't find your post");
+    }
+
+    // attachment
+    let oldAttachment = postFound.attachement;
+    let attachementURL = postFound.attachement;
+    if (req.file) {
+      attachementURL = `${req.protocol}://${req.get("host")}/images/${
+        req.file.filename
+      }`;
+    }
+
+    await postFound.update({
+      title: req.body.title,
+      content: req.body.content,
+      attachement: attachementURL,
+    });
+
+    // delete old image
+    if (oldAttachment && oldAttachment != attachementURL) {
+      const filename = oldAttachment.split("/images")[1];
+      fs.unlink(`images/${filename}`, (error) => {
+        error ? console.log(error) : console.log("file has been deleted");
+      });
+    }
+
+    res.status(201).json({
+      message: " Your post has been updated",
+      PostUpdated: postFound,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 exports.getAllPosts = async (req, res) => {
   try {
     const fields = req.query.fields;
@@ -150,7 +192,7 @@ exports.deletePost = async (req, res) => {
       where: { id: req.params.id },
     });
 
-    // attachement
+    // attachment
     if (post.attachement !== null) {
       const filename = post.attachement.split("/images")[1];
       fs.unlink(`images/${filename}`, (error) => {
@@ -174,44 +216,5 @@ exports.deletePost = async (req, res) => {
     }
   } catch (error) {
     res.status(501).json({ error: error.message });
-  }
-};
-
-// PROJET AMELIORATION
-exports.updatePost = async (req, res) => {
-  try {
-    const attachementURL = `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`;
-
-    if (!attachementURL) {
-      throw new Error("Sorry,something gone wrong , please try aagain later");
-    }
-
-    const postFound = await models.Post.findOne({
-      where: { id: req.params.id },
-    });
-
-    if (!postFound) {
-      throw new Error("Sorry,can't find your post");
-    }
-
-    if (postFound && postFound.UserId !== req.user.id) {
-      res.status(400).json({ error: error.message });
-    }
-
-    await postFound.update({
-      title: req.body.title,
-      content: req.body.content,
-      attachement: attachementURL,
-      userId: req.user.id,
-    });
-
-    res.status(201).json({
-      message: " Your post has been updated",
-      PostUpdated: postFound,
-    });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
   }
 };

@@ -65,6 +65,31 @@ export default {
     }
   },
 
+  async updatePost(post, file) {
+    // Authenticate against API
+    let user = JSON.parse(localStorage.user);
+    const formData = new FormData();
+    formData.append("title", post.title);
+    formData.append("content", post.content);
+    formData.append("file", file);
+    formData.append("userId", user.userId);
+
+    const resp = await fetch("http://localhost:3000/api/posts/" + post.id, {
+      method: "PUT",
+      headers: {
+        Authorization: localStorage.token,
+      },
+      body: formData,
+    });
+    const json = await resp.json();
+    if (resp.ok) {
+      return json;
+    } else {
+      console.log(json.error);
+      return false;
+    }
+  },
+
   async addComment(postId, newComment) {
     // Authenticate against API
     let user = JSON.parse(localStorage.user);

@@ -2,13 +2,15 @@
   <div class="boxPost">
     <router-link
       :to="{
-        name: 'PostDetail',
+        name: 'PostDetailRoute',
         params: { post: post, postId: post.id.toString() },
       }"
     >
       <h2>{{ post.title }}</h2>
-      <img v-show="post.attachement" :src="post.attachement" alt="image" />
-      <h3>{{ post.content }}</h3>
+      <div class="content">
+        <img v-show="post.attachement" :src="post.attachement" alt="image" />
+        <h3>{{ post.content }}</h3>
+      </div> 
       <h5>
         Modifié le: <span style="color: blue">{{ post.updatedAt }}</span>
       </h5>
@@ -18,6 +20,16 @@
           >{{ post.User.firstName }} {{ post.User.lastName }}</span
         >
       </h5>
+    </router-link>
+
+    <router-link
+      v-show="showModify(post)"
+      :to="{
+        name: 'updatePost',
+        params: { post: post },
+      }"
+    >
+      Modifier le post
     </router-link>
 
     <p id="message"></p>
@@ -46,6 +58,11 @@ export default {
       let postUserId = post.UserId;
       return loggedUserId == postUserId || isAdmin == 1;
     },
+    showModify(post) {
+      let loggedUserId = JSON.parse(localStorage.user).userId;
+      let postUserId = post.UserId;
+      return loggedUserId == postUserId;
+    },
 
     async deletePost(idPost) {
       let json = await store.deletePost(idPost);
@@ -64,6 +81,10 @@ export default {
  
 
 <style scoped>
+.content{
+ display: flex;
+}
+
 a {
   color: rgb(77, 127, 235);
   text-decoration: none;
@@ -88,5 +109,9 @@ h3 {
 }
 h5 {
   text-align: right;
+}
+img {
+  height: 10rem;
+
 }
 </style>

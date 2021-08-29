@@ -3,6 +3,7 @@
     <GoBack />
     <section class="post">
       <h2>{{ post.title }}</h2>
+      <img v-show="post.attachement" :src="post.attachement" alt="image" />
       <h3>{{ post.content }}</h3>
       <h5>
         Modifié le: <span style="color: blue">{{ post.updatedAt }}</span>
@@ -65,15 +66,11 @@ export default {
     };
   },
   async created() {
-    this.commentaires = await store.getCommentsForPost(this.postId);
+    this.commentaires = await store.getCommentsForPost(this.post.id);
   },
   props: {
     post: {
       type: Object,
-      required: true,
-    },
-    postId: {
-      type: String,
       required: true,
     },
   },
@@ -82,7 +79,7 @@ export default {
       if (!this.newComment) {
         return;
       }
-      let json = await store.addComment(this.postId, this.newComment);
+      let json = await store.addComment(this.post.id, this.newComment);
       if (json) {
         //redirection
         this.$router.go();
@@ -115,9 +112,7 @@ export default {
 
 <style scoped>
 img {
-  max-width: 600px;
   height: auto;
-  width: 100%;
   max-height: 400px;
 }
 
@@ -151,5 +146,14 @@ p {
   text-decoration: none;
   font-style: italic;
   margin: 0.5rem;
+}
+
+textarea {
+    padding: 10px;
+    max-width: 100%;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
 }
 </style>
