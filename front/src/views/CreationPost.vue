@@ -27,7 +27,7 @@
           @change="getFile"
           placeholder="Charger le fichier"
         />
-   
+
         <button type="submit" class="btn">Ajouter</button>
         <p id="message"></p>
       </div>
@@ -46,21 +46,18 @@ export default {
     };
   },
   methods: {
-    getFile(){
-        this.file = this.$refs.file.files[0];
+    getFile() {
+      this.file = this.$refs.file.files[0];
     },
     async createPost() {
-      let json = await store.createPost(
-        this.title,
-        this.content,
-        this.file
-      );
+      let json = await store.createPost(this.title, this.content, this.file);
       if (json) {
         //redirection
         const redirectPath = this.$route.query.redirect || "/";
         this.$router.push(redirectPath);
       } else {
-        document.getElementById("message").innerText = "L'ajout du post est impossible";
+        document.getElementById("message").innerText =
+          "L'ajout du post est impossible";
       }
     },
   },

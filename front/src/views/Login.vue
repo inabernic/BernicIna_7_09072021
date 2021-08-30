@@ -26,7 +26,12 @@ export default {
       let json = await store.login(this.email, this.password);
       console.log(json);
       if (json) {
-        localStorage.user = JSON.stringify({userId: json.user.id, firstName: json.user.firstName, lastName: json.user.lastName, isAdmin: json.user.isAdmin});
+        localStorage.user = JSON.stringify({
+          userId: json.user.id,
+          firstName: json.user.firstName,
+          lastName: json.user.lastName,
+          isAdmin: json.user.isAdmin,
+        });
         localStorage.token = json.token;
 
         const redirectPath = this.$route.query.redirect || "/";

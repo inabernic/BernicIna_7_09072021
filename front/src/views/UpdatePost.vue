@@ -25,10 +25,10 @@
           name="file"
           ref="file"
           class="input"
-          @change="getFile"
+          @change="updateFile"
         />
-   
-        <button type="submit" class="btn">Enregistrer la modification </button>
+
+        <button type="submit" class="btn">Enregistrer la modification</button>
         <p id="message"></p>
       </div>
     </form>
@@ -44,28 +44,34 @@ export default {
     };
   },
 
-   props: {
+  props: {
     post: {
       type: Object,
       required: true,
     },
-   },
+  },
 
   methods: {
-    getFile(){
-        this.file = this.$refs.file.files[0];
+    updateFile() {
+      this.file = this.$refs.file.files[0];
+      let reader = new FileReader();
+      if (this.file) {
+        reader.readAsDataURL(this.file);
+        reader.onload = (e) => {
+          this.post.attachement = e.target.result;
+        };
+      } else {
+        this.post.attachement = null;
+      }
     },
     async updatePost() {
-      let json = await store.updatePost(
-        this.post,
-        this.file,
-      );
+      let json = await store.updatePost(this.post, this.file);
       if (json) {
         //redirection
-        const redirectPath = this.$route.query.redirect || "/";
-        this.$router.push(redirectPath);
+        this.$router.go(-1);
       } else {
-        document.getElementById("message").innerText = "La modification du post est impossible";
+        document.getElementById("message").innerText =
+          "La modification du post est impossible";
       }
     },
   },

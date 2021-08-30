@@ -1,25 +1,25 @@
 <template>
- <span class="go-back">
-     <button @click="goBack">Retour</button>
-     </span>   
+  <span class="go-back">
+    <button @click="goBack">Retour</button>
+  </span>
 </template>
 
 <script>
 export default {
-    methods:  {
-     goBack(){
-         return this.$router.go(-1);
-     }   
+  methods: {
+    goBack() {
+      return this.$router.go(-1);
     },
-}
+  },
+};
 </script>
 
 <style scoped>
-.go-back{
-    display: flex;
-    cursor: pointer;
+.go-back {
+  display: flex;
+  cursor: pointer;
 }
-button{
-    border: 0;
+button {
+  border: 0;
 }
 </style>

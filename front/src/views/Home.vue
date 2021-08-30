@@ -1,15 +1,13 @@
 <template>
   <div class="home">
-    <h1 class="title">Goupomania- le meilleur réseau social interne</h1>
-
-    <router-link to="/new"> Ajouter un nouveau post </router-link>
-
-    <div class="posts">
-      <div v-for="post in posts" :key="post.id">
-        <Post :post="post" />
+    <p><router-link to="/new"><button class="btn btn-outline-success btn-sm">Ajouter un nouveau post</button> </router-link></p>
+    <p id="message"></p>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div v-for="post in posts" :key="post.id" class="col">
+          <Post :post="post" />
       </div>
     </div>
-    <p id="message"></p>
+  
   </div>
 </template>
 
@@ -29,9 +27,7 @@ export default {
   async created() {
     this.posts = await store.getAllPosts();
   },
-  methods: {
-
-  },
+  methods: {},
 };
 </script>
 
@@ -50,7 +46,4 @@ img {
   display: block;
   align-content: left;
 }
-
 </style>
-
-

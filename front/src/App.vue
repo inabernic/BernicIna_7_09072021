@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <!-- <TheNavigation /> -->
     <TheNavigationConnex v-show="!connected" />
     <TheNavigationDeconnex v-show="connected" />
@@ -108,9 +108,9 @@ export default {
 }
 
 /* Navigation common styles */
-.logo{
+.logo {
   height: 3rem;
-  position:absolute;
+  position: absolute;
   left: 0rem;
 }
 #nav {
@@ -131,7 +131,7 @@ export default {
 }
 
 #nav a.vue-activ-link-class {
-  color: #42b983;
+  color: #4272b9;
 }
 
 .nav-links {

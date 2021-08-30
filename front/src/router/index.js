@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import store from "@/store";
+import utils from "@/utils";
 
 Vue.use(VueRouter);
 
@@ -47,6 +48,27 @@ const routes = [
     },
   },
   {
+    path: "/post/:postId/update",
+    props: true,
+    name: "updatePost",
+    component: () =>
+      import(/* webpackChunkName: "updatePost" */ "../views/UpdatePost.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+
+    beforeEnter: async (to, from, next) => {
+      if (!to.params.post) {
+        to.params.post = await store.getPostById(to.params.postId);
+      }
+      if (to.params.post && utils.isConnectedUserOwnerOf(to.params.post)) {
+        next();
+      } else {
+        next({ name: "Home" });
+      }
+    },
+  },
+  {
     path: "/user",
     name: "user",
     component: () => import(/* webpackChunkName: "User" */ "../views/User.vue"),
@@ -78,13 +100,6 @@ const routes = [
       import(
         /* webpackChunkName: "CreationPost" */ "../views/CreationPost.vue"
       ),
-  },
-  {
-    path: ".",
-    props: true,
-    name: "updatePost",
-    component: () =>
-      import(/* webpackChunkName: "updatePost" */ "../views/UpdatePost.vue"),
   },
 ];
 

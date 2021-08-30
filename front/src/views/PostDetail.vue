@@ -14,6 +14,15 @@
           >{{ post.User.firstName }} {{ post.User.lastName }}</span
         >
       </h5>
+      <router-link
+        v-show="showModify()"
+        :to="{
+          name: 'updatePost',
+          params: { post: post },
+        }"
+      >
+        Modifier le post
+      </router-link>
     </section>
 
     <section class="comms">
@@ -39,7 +48,10 @@
             {{ comm.User.firstName }} {{ comm.User.lastName }}
           </p>
           <p class="card_text">
-            <button @click="deleteComment(comm.id)" v-show="showDelete(comm)">
+            <button
+              @click="deleteComment(comm.id)"
+              v-show="showDeleteComment(comm)"
+            >
               x
             </button>
             {{ comm.comment }}
@@ -54,6 +66,7 @@
 <script>
 import GoBack from "@/components/GoBack";
 import store from "@/store";
+import utils from "@/utils";
 
 export default {
   components: {
@@ -88,16 +101,23 @@ export default {
           "L'ajout du post est impossible";
       }
     },
+    showDelete() {
+      return (
+        utils.isConnectedUserOwnerOf(this.post) || utils.isConnectedUserAdmin()
+      );
+    },
+    showModify() {
+      return utils.isConnectedUserOwnerOf(this.post);
+    },
 
-    showDelete(comment) {
-      let loggedUserId = JSON.parse(localStorage.user).userId;
-      let isAdmin = JSON.parse(localStorage.user).isAdmin;
-      let commentUserId = comment.UserId;
-      return loggedUserId == commentUserId || isAdmin==1;
+    showDeleteComment(comment) {
+      return (
+        utils.isConnectedUserOwnerOf(comment) || utils.isConnectedUserAdmin()
+      );
     },
 
     async deleteComment(idComm) {
-      let json= await store.deleteComment(idComm);
+      let json = await store.deleteComment(idComm);
       if (json) {
         //redirection
         this.$router.go();
@@ -149,11 +169,11 @@ p {
 }
 
 textarea {
-    padding: 10px;
-    max-width: 100%;
-    line-height: 1.5;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 1px #999;
+  padding: 10px;
+  max-width: 100%;
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
 }
 </style>

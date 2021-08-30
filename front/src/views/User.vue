@@ -4,7 +4,7 @@
 
     <div class="posts">
       <div v-for="post in myPosts" :key="post.id">
-          <Post :post="post" />
+        <Post :post="post" />
       </div>
     </div>
   </div>
@@ -24,12 +24,8 @@ export default {
   async created() {
     this.myPosts = await store.getMyPosts(this.user);
   },
-  methods: {
-
-  },
+  methods: {},
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
