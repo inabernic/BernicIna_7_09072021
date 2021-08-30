@@ -1,28 +1,28 @@
 <template>
   <div class="card mb-2">
-    <div class="row g-0">
-      <div class="col-md-4 h-100">
-        <img 
-          class="img-fluid rounded-start img-thumbnail"
-          style="height: 150px; width: 150px; object-fit: cover;"
-          v-show="post.attachement"
-          :src="post.attachement"
-          alt="no image"
-        />
-        <img
-          class="img-fluid rounded-start img-thumbnail"
-          style="height: 150px; width: 150px; object-fit: cover;"
-          src="@/assets/no_image.png"
-          v-show="!post.attachement"
-        />
-      </div>
-      <div class="col-md-8">
-        <router-link
-          :to="{
-            name: 'PostDetailRoute',
-            params: { post: post, postId: post.id.toString() },
-          }"
-        >
+    <router-link
+      :to="{
+        name: 'PostDetailRoute',
+        params: { post: post, postId: post.id.toString() },
+      }"
+    >
+      <div class="row g-0">
+        <div class="col-md-4 h-100">
+          <img
+            class="img-fluid rounded-start img-thumbnail"
+            style="height: 150px; width: 150px; object-fit: cover"
+            v-show="post.attachement"
+            :src="post.attachement"
+            alt="no image"
+          />
+          <img
+            class="img-fluid rounded-start img-thumbnail"
+            style="height: 150px; width: 150px; object-fit: cover"
+            src="@/assets/no_image.png"
+            v-show="!post.attachement"
+          />
+        </div>
+        <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text"></p>
@@ -31,12 +31,13 @@
             </div>
             <p class="card-text"></p>
           </div>
-        </router-link>
+        </div>
       </div>
-    </div>
+    </router-link>
     <div class="card-footer d-flex d-flex justify-content-between">
-      <small class="text-muted align-self-center">Modifié le: {{ post.updatedAt }} 
-        par: {{ post.User.firstName }} {{ post.User.lastName }}
+      <small class="text-muted align-self-center"
+        >Modifié le: {{ post.updatedAt }} par: {{ post.User.firstName }}
+        {{ post.User.lastName }}
       </small>
       <router-link
         v-show="showModify()"
