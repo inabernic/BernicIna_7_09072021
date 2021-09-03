@@ -6,7 +6,7 @@
       <input v-model="email" type="email" name="email" class="input" required />
       <label for="password">Password</label>
       <input v-model="password" type="password" class="input" required />
-      <button @click="login()" class="btn">Login</button>
+      <button @click="login()" class="btn btn-success">Login</button>
       <p id="message"></p>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <span class="go-back">
-    <button @click="goBack">Retour</button>
+    <button class="btn btn-primary" @click="goBack">Retour</button>
   </span>
 </template>
 
@@ -21,5 +21,6 @@ export default {
 }
 button {
   border: 0;
+  margin: 1rem;
 }
 </style>

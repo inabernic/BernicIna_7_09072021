@@ -139,4 +139,7 @@ a:hover,
 a:visited {
   text-decoration: underline;
 }
+.text-truncate{
+  color: black;
+}
 </style>

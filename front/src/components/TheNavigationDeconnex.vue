@@ -13,13 +13,9 @@
         <router-link to="/user">Mon Profil</router-link
         >
       </li>
-      <li class="links">
-
-      </li>
-          <div id="logoutButton">
-          <small>log out</small>
-          <button @click="logOut" type="button" class="btn btn-close" aria-label="Close"></button>
-        </div>
+      <li class="links"></li>
+      
+          <button @click="logOut" type="button" class="btn btn-danger" >Log out</button>
     </ul>
   </nav>
 </template>
@@ -36,9 +32,5 @@ export default {
 </script>
 
 <style scoped>
-#logoutButton small{
-  line-height: 1.5pt;
-  vertical-align: middle;
-  text-decoration: none;
-}
+
 </style>

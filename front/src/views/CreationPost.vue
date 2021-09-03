@@ -8,15 +8,18 @@
           type="text"
           name="title"
           class="input"
-          placeholder="Entrez le title"
+          placeholder="Entrez le title (jusqu'a 50 caractère)"
+          maxlength="50"
           required
         />
         <textarea
           v-model="content"
+          taille=100
           type="text"
           name="content"
           class="input"
-          placeholder="Entrez le contenu"
+          placeholder="Entrez le contenu  (jusqu'a 1000 caractère)"
+          maxlength="1000"
           required
         />
         <input
@@ -28,7 +31,7 @@
           placeholder="Charger le fichier"
         />
 
-        <button type="submit" class="btn">Ajouter</button>
+        <button type="submit" class="btn btn-success">Ajouter</button>
         <p id="message"></p>
       </div>
     </form>

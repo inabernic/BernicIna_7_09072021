@@ -73,7 +73,6 @@ export default {
     formData.append("content", post.content);
     formData.append("file", file);
     formData.append("userId", user.userId);
-
     const resp = await fetch("http://localhost:3000/api/posts/" + post.id, {
       method: "PUT",
       headers: {
@@ -105,6 +104,30 @@ export default {
         postId: postId,
       }),
     });
+    const json = await resp.json();
+    if (resp.ok) {
+      return json;
+    } else {
+      console.log(json.error);
+      return false;
+    }
+  },
+
+  async updateComment(comment) {
+    console.log(comment.comment);
+    const resp = await fetch(
+      "http://localhost:3000/api/comments/" + comment.id,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: localStorage.token,
+        },
+        body: JSON.stringify({
+          comment: comment.comment,
+        }),
+      }
+    );
     const json = await resp.json();
     if (resp.ok) {
       return json;

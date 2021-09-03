@@ -22,6 +22,30 @@ exports.createComment = async (req, res) => {
   }
 };
 
+exports.updateComment = async (req, res) => {
+  try {
+    const commentFound = await models.Comment.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (!commentFound) {
+      throw new Error("Sorry,can't find your comment");
+    }
+
+    console.log(req.body);
+    await commentFound.update({
+      comment: req.body.comment,
+    });
+
+    res.status(201).json({
+      message: " Your comment has been updated",
+      CommentUpdated: commentFound,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 exports.getCommentsByPostId = async (req, res) => {
   try {
     const comments = await models.Comment.findAll({

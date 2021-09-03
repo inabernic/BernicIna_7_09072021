@@ -10,6 +10,13 @@ const router = express.Router();
 router.get("/post/:id", auth, commentCtrl.getCommentsByPostId);
 router.get("/user/:id", auth, multer, commentCtrl.getCommentsByUserId);
 router.post("/new", auth, multer, commentCtrl.createComment);
+router.put(
+  "/:id",
+  auth,
+  multer,
+  isOwnerOrAdminComment,
+  commentCtrl.updateComment
+);
 router.delete(
   "/:id",
   auth,
