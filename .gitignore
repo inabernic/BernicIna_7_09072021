@@ -1,3 +1,7 @@
 **/node_modules/
 **/.vscode/settings.json
+
+# exclude images
 backend/images/*
+# keep one file in images folder
+!backend/images/.gitkeep 
