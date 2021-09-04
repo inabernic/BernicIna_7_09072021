@@ -2,7 +2,7 @@
   <div>
     <h1>Salut {{ user.firstName }}, voila tes posts:</h1>
 
-    <div class="posts">
+     <div class="row row-cols-1 row-cols-md-2 g-4">
       <div v-for="post in myPosts" :key="post.id">
         <Post :post="post" />
       </div>
