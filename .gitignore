@@ -5,3 +5,5 @@
 backend/images/*
 # keep one file in images folder
 !backend/images/.gitkeep 
+
+backend/config/config.json

@@ -5,12 +5,5 @@
 		"database": "groupomania_dev",
 		"host": "localhost",
 		"dialect": "mysql"
-	},
-	"test": {
-		"username": "root",
-		"password": "",
-		"database": "groupomania",
-		"host": "localhost",
-		"dialect": "mysql"
 	}
 }
