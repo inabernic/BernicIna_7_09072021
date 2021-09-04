@@ -16,19 +16,9 @@ module.exports = {
     return queryInterface.bulkInsert("Users", [
       {
         id: 1,
-        firstName: "John",
-        lastName: "Doe",
-        email: "example@example.com",
-        password: await bcrypt.hash("123", 10),
-        isAdmin: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 2,
-        firstName: "Ina",
-        lastName: "B",
-        email: "ina@example.com",
+        firstName: "Admin",
+        lastName: "",
+        email: "admin@example.com",
         password: await bcrypt.hash("123", 10),
         isAdmin: true,
         createdAt: new Date(),

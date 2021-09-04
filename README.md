@@ -9,11 +9,17 @@ Vue.js
 # backend
 ## 
 ## Project setup
-Run ```npm install```
-Copy the content of  ```config/config.json.template```  in the ```config/config.json``` 
-Configure ```config/config.json``` 
+### Run ```npm install```
+### Copy the content of  ```config/config.json.template```  in the ```config/config.json``` 
+### Configure ```config/config.json``` with your database details
+### Update database initial setup and the user admin as you wish in ```seeders/*.js``` files
+The default admin:
+```
+    email: admin@example.com
+    password: 123
+```
+### Run ```sequelize db:create && sequelize db:migrate && sequelize db:seed ```
 
-Run ```sequelize db:create && sequelize db:migrate && sequelize db:seed ```
 
 
 # front
@@ -40,7 +46,7 @@ serve -s dist
 npm run lint
 ```
 
-### Customize configuration
+### Customize VUE configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 

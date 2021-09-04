@@ -15,16 +15,8 @@ module.exports = {
       {
         id: 1,
         userId: 1,
-        title: "Creation",
-        content: "publistique",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 2,
-        userId: 2,
-        title: "Creation2",
-        content: "publistique2",
+        title: "Groupomania",
+        content: "Welcome to the best group discussions",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
