@@ -35,9 +35,9 @@
           required
         />
         <button type="submit" class="btn btn-success">Créer mon compte</button>
-        <p id="message"></p>
+
+        <p id="message">{{ error }}</p>
       </div>
-      
     </form>
   </div>
 </template>
@@ -51,10 +51,20 @@ export default {
       lastName: null,
       email: null,
       password: null,
+      error: null,
     };
   },
   methods: {
     async inscription() {
+      const password_regex =
+        /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
+
+      if (!password_regex.test(this.password)) {
+        this.error =
+          "Le mot de passe doit contenir: 1 Majuscule, 1 minuscule, 1 ciffre, 1 caracetr spècial, min 8 caracteres";
+        return;
+      }
+
       let json = await store.inscription(
         this.firstName,
         this.lastName,
@@ -71,7 +81,8 @@ export default {
         const redirectPath = this.$route.query.redirect || "/";
         this.$router.push(redirectPath);
       } else {
-        document.getElementById("message").innerText = "Creation du compte impossible !";
+        document.getElementById("message").innerText =
+          "Creation du compte impossible !";
       }
     },
   },
