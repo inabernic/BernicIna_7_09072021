@@ -5,7 +5,6 @@
       <div class="card-header">
         <h2>{{ post.title }}</h2>
       </div>
-
       <div class="cardPost">
         <div class="card-body">
           <img v-show="post.attachement" :src="post.attachement" alt="image" />
@@ -42,11 +41,11 @@
 
       <div class="card-footer text-muted">
         <h5>
-          Modifié le: <span style="color: blue">{{ post.updatedAt }}</span>
+          Modifié le: <span style="color: #15212e">{{ post.updatedAt }}</span>
         </h5>
         <h5>
           Posté par:
-          <span style="color: blue"
+          <span style="color: #15212e"
             >{{ post.User.firstName }} {{ post.User.lastName }}</span
           >
         </h5>
@@ -68,11 +67,13 @@
       <button @click="addComment" class="btn btn-success">Ajouter</button>
       <p id="message"></p>
 
-      <p class="TitleComment">Les commentaires du post:</p>
+      <p class="TitleComment">
+        <span style="color: blue">Les commentaires du post:</span>
+      </p>
       <p></p>
       <div class="cardComment" id="commentaires">
         <div v-for="comm in commentaires" :key="comm.id" class="card">
-          <div>
+          <div class="containComm">
             <p class="card_text">
               <input :id="comm.id" disabled v-model="comm.comment" />
               <button
@@ -95,9 +96,14 @@
 
             <div class="card-footer d-flex d-flex justify-content-between">
               <small class="text-muted align-self-center"
-                >Modifié le: {{ formatDate(comm.updatedAt) }} par:
-                {{ comm.User.firstName }}
-                {{ comm.User.lastName }}
+                >Modifié le:
+                <span style="color: #15212e">{{
+                  formatDate(comm.updatedAt)
+                }}</span>
+                par:
+                <span style="color: #15212e">
+                  {{ comm.User.firstName }} {{ comm.User.lastName }}</span
+                >
               </small>
 
               <button
@@ -270,11 +276,6 @@ img {
   padding: 40px 0;
 }
 
-.post-details {
-  display: flex;
-  justify-content: space-between;
-}
-
 p {
   font-size: 20px;
   text-align: left;
@@ -282,6 +283,11 @@ p {
 
 .cardComment {
   justify-content: space-between;
+}
+
+.containComm {
+  background-color: #e9ecef;
+ 
 }
 
 .card {
@@ -295,7 +301,6 @@ p {
   font-size: 25px;
   font-weight: bold;
   text-decoration: none;
-  font-style: italic;
   margin: 0.5rem;
 }
 

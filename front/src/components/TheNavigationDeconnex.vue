@@ -10,12 +10,13 @@
         <router-link to="/">Discussions</router-link>
       </li>
       <li class="links btn btn-light">
-        <router-link to="/user">Mon Profil</router-link
-        >
+        <router-link to="/user">Mon Profil</router-link>
       </li>
       <li class="links"></li>
-      
-          <button @click="logOut" type="button" class="btn btn-danger" >Log out</button>
+
+      <button @click="logOut" type="button" class="btn btn-danger">
+        Log out
+      </button>
     </ul>
   </nav>
 </template>
@@ -32,5 +33,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

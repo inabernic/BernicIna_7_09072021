@@ -10,7 +10,6 @@
 </template>
 
 <script>
-//import TheNavigation from "@/components/TheNavigation"
 import TheNavigationConnex from "@/components/TheNavigationConnex";
 import TheNavigationDeconnex from "@/components/TheNavigationDeconnex";
 export default {
@@ -125,13 +124,13 @@ export default {
 }
 
 #nav a {
-  color: #2c3e50;
+  color: black;
   text-decoration: none;
   font-weight: bold;
 }
 
 #nav a.vue-activ-link-class {
-  color: #4272b9;
+  color: #c52f25;
 }
 
 .nav-links {

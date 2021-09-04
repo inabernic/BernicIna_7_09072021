@@ -8,7 +8,7 @@
           type="text"
           name="firstName"
           class="input"
-          placeholder="Entrez votre prenom"
+          placeholder="Prenom *"
           required
         />
         <input
@@ -16,7 +16,7 @@
           type="text"
           name="lastName"
           class="input"
-          placeholder="Entrez votre nom"
+          placeholder="Nom *"
           required
         />
         <input
@@ -24,26 +24,20 @@
           type="email"
           name="email"
           class="input"
-          placeholder="Entrez votre e-mail"
+          placeholder="E-mail *   'example@example.com'"
           required
         />
         <input
           v-model="password"
           type="password"
           class="input"
-          placeholder="Entrez votre mot de passe"
+          placeholder="Mot de passe * "
           required
         />
-        <input
-          v-model="password"
-          type="password"
-          class="input"
-          placeholder="Confirmer votre mot de passe"
-          required
-        />
-        <button type="submit" class="btn">Créer mon compte</button>
+        <button type="submit" class="btn btn-success">Créer mon compte</button>
         <p id="message"></p>
       </div>
+      
     </form>
   </div>
 </template>
@@ -77,7 +71,7 @@ export default {
         const redirectPath = this.$route.query.redirect || "/";
         this.$router.push(redirectPath);
       } else {
-        document.getElementById("message").innerText = "Connexion impossible";
+        document.getElementById("message").innerText = "Creation du compte impossible !";
       }
     },
   },

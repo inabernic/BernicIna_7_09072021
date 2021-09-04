@@ -14,7 +14,7 @@
         />
         <textarea
           v-model="content"
-          taille=100
+          taille="100"
           type="text"
           name="content"
           class="input"

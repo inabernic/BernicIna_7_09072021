@@ -1,4 +1,6 @@
+// On utilise l'algorithme bcrypt pour hasher le mot de passe des utilisateurs
 const bcrypt = require("bcrypt");
+// On utilise le package jsonwebtoken pour attribuer un token à un utilisateur au moment ou il se connecte
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 
@@ -29,13 +31,12 @@ exports.getOneUser = async (req, res) => {
   }
 };
 
+/**  Functions for user signup **/
 exports.signup = async (req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
   const password = req.body.password;
-
-  console.log(req.body);
 
   try {
     //verif params
@@ -165,8 +166,7 @@ function createToken(userId, isAdmin) {
 function validationInput(email, firstName, lastName, password) {
   const email_regex =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //ou
-  //    /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
   const password_regex =
     /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
 

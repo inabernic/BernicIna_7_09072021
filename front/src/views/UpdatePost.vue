@@ -28,7 +28,9 @@
           @change="updateFile"
         />
 
-        <button type="submit" class="btn btn-success">Enregistrer la modification</button>
+        <button type="submit" class="btn btn-success">
+          Enregistrer la modification
+        </button>
         <p id="message"></p>
       </div>
     </form>

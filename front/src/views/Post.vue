@@ -36,8 +36,10 @@
     </router-link>
     <div class="card-footer d-flex d-flex justify-content-between">
       <small class="text-muted align-self-center"
-        >Modifié le:  <span style="color: blue">{{post.updatedAt }}</span>   par: <span style="color: blue">{{ post.User.firstName }}
-        {{ post.User.lastName }}</span>
+        >Modifié le: <span style="color: blue">{{ post.updatedAt }}</span> par:
+        <span style="color: blue"
+          >{{ post.User.firstName }} {{ post.User.lastName }}</span
+        >
       </small>
       <router-link
         v-show="showModify()"
@@ -139,7 +141,7 @@ a:hover,
 a:visited {
   text-decoration: underline;
 }
-.text-truncate{
+.text-truncate {
   color: black;
 }
 </style>
