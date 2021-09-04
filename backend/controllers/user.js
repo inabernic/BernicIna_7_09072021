@@ -153,11 +153,10 @@ exports.updateUser = async (req, res) => {
 };
 
 function createToken(userId, isAdmin) {
-  //TODO: use donenv for a value of RANDOM_TOKEN_SECRET
-  // const SECRET_TOKEN = process.env.SECRET_TOKEN;
+  const SECRET_TOKEN = process.env.SECRET_TOKEN;
   return (
     "Bearer " +
-    jwt.sign({ id: userId, isAdmin: isAdmin }, "RANDOM_TOKEN_SECRET", {
+    jwt.sign({ id: userId, isAdmin: isAdmin }, SECRET_TOKEN, {
       expiresIn: "24H",
     })
   );

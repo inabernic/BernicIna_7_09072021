@@ -1,6 +1,9 @@
 // import des modules npm - Ajout des plugins externes
 const express = require("express"); // Importation d'express => Framework basé sur node.js
 
+// dotenv
+require("dotenv").config();
+
 const helmet = require("helmet");
 
 // Pour gérer la demande POST provenant de l'application front-end, nous devrons être capables d'extraire l'objet JSON de la demande, on importe donc body-parser
@@ -12,9 +15,6 @@ const postsRoutes = require("./routes/posts");
 const commentsRoutes = require("./routes/comments");
 
 const path = require("path");
-
-// dotenv
-require("dotenv").config();
 
 /*CROSS ORIGIN RESOURCE SHARING */
 app.use((req, res, next) => {

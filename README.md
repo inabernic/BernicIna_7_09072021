@@ -10,8 +10,10 @@ Vue.js
 ## 
 ## Project setup
 ### Run ```npm install```
-### Copy the content of  ```config/config.json.template```  in the ```config/config.json``` 
-### Configure ```config/config.json``` with your database details
+### Copy the content of  ```template.env```  to a new ```.env``` file
+### Add a secret TOKEN and select your environment in ```.env``` file (default is: development)
+### Copy the content of  ```config/config.json.template```  to a new ```config/config.json``` file
+### Add your database details ```config/config.json```
 ### Update database initial setup and the user admin as you wish in ```seeders/*.js``` files
 The default admin:
 ```
