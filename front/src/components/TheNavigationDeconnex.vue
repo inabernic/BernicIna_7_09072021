@@ -7,7 +7,7 @@
     />
     <ul class="nav-links">
       <li class="links btn btn-light">
-        <router-link to="/">Discutions</router-link>
+        <router-link to="/">Discussions</router-link>
       </li>
       <li class="links btn btn-light">
         <router-link to="/user">Mon Profil</router-link

@@ -5,37 +5,40 @@
       <div class="card-header">
         <h2>{{ post.title }}</h2>
       </div>
-      <div class="card-body">
-        <img v-show="post.attachement" :src="post.attachement" alt="image" />
-        <h3 class="card-text">{{ post.content }}</h3>
-      </div>
 
-      <router-link
-        v-show="showModify()"
-        :to="{
-          name: 'updatePost',
-          params: { post: post },
-        }"
-      >
-        <button type="button" class="btn btn-secondary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-pencil-square"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-            ></path>
-            <path
-              fill-rule="evenodd"
-              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-            ></path>
-          </svg>
-        </button>
-      </router-link>
+      <div class="cardPost">
+        <div class="card-body">
+          <img v-show="post.attachement" :src="post.attachement" alt="image" />
+          <h3 class="card-text">{{ post.content }}</h3>
+        </div>
+
+        <router-link
+          v-show="showModify()"
+          :to="{
+            name: 'updatePost',
+            params: { post: post },
+          }"
+        >
+          <button type="button" class="btn btn-secondary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-pencil-square"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+              ></path>
+              <path
+                fill-rule="evenodd"
+                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+              ></path>
+            </svg>
+          </button>
+        </router-link>
+      </div>
 
       <div class="card-footer text-muted">
         <h5>
@@ -65,33 +68,42 @@
       <button @click="addComment" class="btn btn-success">Ajouter</button>
       <p id="message"></p>
 
-      <p>Les commentaires du post:</p>
+      <p class="TitleComment">Les commentaires du post:</p>
       <p></p>
-      <div class="cards" id="commentaires">
+      <div class="cardComment" id="commentaires">
         <div v-for="comm in commentaires" :key="comm.id" class="card">
           <div>
             <p class="card_text">
-              <input :id="comm.id" disabled v-model="comm.comment"  />
+              <input :id="comm.id" disabled v-model="comm.comment" />
               <button
                 @click="updateComment(comm)"
-                id="confirm"
+                :id="'confirm' + comm.id"
                 hidden
                 class="btn btn-primary"
               >
                 Sauvegarder la modification
               </button>
+              <button
+                @click="cancelModifComment(comm)"
+                :id="'cancel' + comm.id"
+                hidden
+                class="btn btn-danger"
+              >
+                x
+              </button>
             </p>
 
             <div class="card-footer d-flex d-flex justify-content-between">
               <small class="text-muted align-self-center"
-                >Modifié le: {{ comm.updatedAt }} par: {{ comm.User.firstName }}
+                >Modifié le: {{ formatDate(comm.updatedAt) }} par:
+                {{ comm.User.firstName }}
                 {{ comm.User.lastName }}
               </small>
 
               <button
                 type="button"
                 class="btn btn-secondary"
-                @click="prepModifyComment(comm.id)"
+                @click="prepModifyComment(comm)"
                 v-show="showModifyComment(comm)"
               >
                 <svg
@@ -164,6 +176,7 @@ export default {
     this.commentaires = await store.getCommentsForPost(this.post.id);
     this.post.updatedAt = this.post.updatedAt.substring(0, 10);
   },
+
   props: {
     post: {
       type: Object,
@@ -171,6 +184,10 @@ export default {
     },
   },
   methods: {
+    formatDate(date) {
+      return date.substring(0, 10);
+    },
+
     async addComment() {
       if (!this.newComment) {
         return;
@@ -199,10 +216,19 @@ export default {
       return utils.isConnectedUserOwnerOf(comm);
     },
 
-    prepModifyComment(idComm) {
-      console.log(idComm);
-      document.getElementById(idComm).disabled = false;
-      document.getElementById("confirm").hidden = false;
+    prepModifyComment(comm) {
+      comm.oldComm = comm.comment;
+      console.log(comm.oldComm);
+      document.getElementById(comm.id).disabled = false;
+      document.getElementById("confirm" + comm.id).hidden = false;
+      document.getElementById("cancel" + comm.id).hidden = false;
+    },
+
+    cancelModifComment(comm) {
+      comm.comment = comm.oldComm;
+      document.getElementById(comm.id).disabled = true;
+      document.getElementById("confirm" + comm.id).hidden = true;
+      document.getElementById("cancel" + comm.id).hidden = true;
     },
 
     async updateComment(comm) {
@@ -231,6 +257,10 @@ export default {
 </script>
 
 <style scoped>
+.TitleComment {
+  margin-top: 5rem;
+}
+
 img {
   height: auto;
   max-height: 400px;
@@ -250,7 +280,7 @@ p {
   text-align: left;
 }
 
-.cards {
+.cardComment {
   justify-content: space-between;
 }
 
@@ -276,5 +306,9 @@ textarea {
   border-radius: 5px;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px #999;
+}
+
+.cardPost {
+  background-color: #e9ecef;
 }
 </style>
