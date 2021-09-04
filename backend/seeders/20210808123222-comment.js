@@ -20,14 +20,6 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        id: 2,
-        userId: 2,
-        postId: 2,
-        comment: "super2",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
     ]);
   },
 
