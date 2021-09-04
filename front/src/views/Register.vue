@@ -30,6 +30,7 @@
         <input
           v-model="password"
           type="password"
+          :class="{ 'border border-danger': error}"
           class="input"
           placeholder="Mot de passe * "
           required
