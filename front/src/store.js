@@ -1,7 +1,9 @@
 export default {
+  API: "http://localhost:3000",
+
   async login(email, password) {
     // Authenticate against API
-    const resp = await fetch("http://localhost:3000/api/users/login", {
+    const resp = await fetch(this.API + "/api/users/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -19,7 +21,7 @@ export default {
 
   async inscription(firstName, lastName, email, password) {
     // Authenticate against API
-    const resp = await fetch("http://localhost:3000/api/users/signup", {
+    const resp = await fetch(this.API + "/api/users/signup", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -49,7 +51,7 @@ export default {
     formData.append("file", file);
     formData.append("userId", user.userId);
 
-    const resp = await fetch("http://localhost:3000/api/posts/new", {
+    const resp = await fetch(this.API + "/api/posts/new", {
       method: "POST",
       headers: {
         Authorization: localStorage.token,
@@ -73,7 +75,7 @@ export default {
     formData.append("content", post.content);
     formData.append("file", file);
     formData.append("userId", user.userId);
-    const resp = await fetch("http://localhost:3000/api/posts/" + post.id, {
+    const resp = await fetch(this.API + "/api/posts/" + post.id, {
       method: "PUT",
       headers: {
         Authorization: localStorage.token,
@@ -92,7 +94,7 @@ export default {
   async addComment(postId, newComment) {
     // Authenticate against API
     let user = JSON.parse(localStorage.user);
-    const resp = await fetch("http://localhost:3000/api/comments/new", {
+    const resp = await fetch(this.API + "/api/comments/new", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -115,19 +117,16 @@ export default {
 
   async updateComment(comment) {
     console.log(comment.comment);
-    const resp = await fetch(
-      "http://localhost:3000/api/comments/" + comment.id,
-      {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: localStorage.token,
-        },
-        body: JSON.stringify({
-          comment: comment.comment,
-        }),
-      }
-    );
+    const resp = await fetch(this.API + "/api/comments/" + comment.id, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.token,
+      },
+      body: JSON.stringify({
+        comment: comment.comment,
+      }),
+    });
     const json = await resp.json();
     if (resp.ok) {
       return json;
@@ -138,16 +137,13 @@ export default {
   },
 
   async deleteComment(commentId) {
-    const resp = await fetch(
-      "http://localhost:3000/api/comments/" + commentId,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: localStorage.token,
-        },
-      }
-    );
+    const resp = await fetch(this.API + "/api/comments/" + commentId, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.token,
+      },
+    });
     const json = await resp.json();
     if (resp.ok) {
       return json;
@@ -158,7 +154,7 @@ export default {
   },
 
   async deletePost(postId) {
-    const resp = await fetch("http://localhost:3000/api/posts/" + postId, {
+    const resp = await fetch(this.API + "/api/posts/" + postId, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
@@ -176,7 +172,7 @@ export default {
 
   async getPostById(postId) {
     let post = false;
-    let api = "http://localhost:3000/api/posts/" + postId;
+    let api = this.API + "/api/posts/" + postId;
     const resp = await fetch(api, {
       method: "GET",
       headers: {
@@ -195,7 +191,7 @@ export default {
 
   async getMyPosts(user) {
     let posts = [];
-    let api = "http://localhost:3000/api/posts/user/" + user.userId;
+    let api = this.API + "/api/posts/user/" + user.userId;
     const resp = await fetch(api, {
       method: "GET",
       headers: {
@@ -214,7 +210,7 @@ export default {
 
   async getAllPosts() {
     let posts = [];
-    const resp = await fetch("http://localhost:3000/api/posts", {
+    const resp = await fetch(this.API + "/api/posts", {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -232,7 +228,7 @@ export default {
 
   async getCommentsForPost(postId) {
     let comments = [];
-    let api = "http://localhost:3000/api/comments/post/" + postId;
+    let api = this.API + "/api/comments/post/" + postId;
     const resp = await fetch(api, {
       method: "GET",
       headers: {
