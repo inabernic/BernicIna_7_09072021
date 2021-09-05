@@ -1,4 +1,6 @@
 <template>
+<div>
+    <GoBack />
   <div class="creationPost">
     <h1>Veuillez ajouter le post :</h1>
     <form @submit.prevent="createPost" autocomplete="off">
@@ -36,11 +38,17 @@
       </div>
     </form>
   </div>
+  </div>
 </template>
 
 <script>
 import store from "@/store";
+import GoBack from "@/components/GoBack";
+
 export default {
+  components: {
+    GoBack,
+  },
   data() {
     return {
       title: null,
