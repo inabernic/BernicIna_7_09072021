@@ -75,7 +75,7 @@
         <div v-for="comm in commentaires" :key="comm.id" class="card">
           <div class="containComm">
             <p class="card_text">
-              <input :id="comm.id" disabled v-model="comm.comment" />
+              <input class="widthComm" :id="comm.id" disabled v-model="comm.comment" />
               <button
                 @click="updateComment(comm)"
                 :id="'confirm' + comm.id"
@@ -263,6 +263,10 @@ export default {
 </script>
 
 <style scoped>
+.widthComm{
+width: 100%;
+}
+
 .TitleComment {
   margin-top: 5rem;
 }
