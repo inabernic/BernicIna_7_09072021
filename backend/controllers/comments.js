@@ -1,5 +1,3 @@
-// import
-
 const models = require("../models");
 const fs = require("fs");
 
